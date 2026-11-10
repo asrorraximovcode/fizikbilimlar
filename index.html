@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Elektr va Magnetizm Praktikumi</title>
-<meta name="description" content="Elektr va magnetizm bo‘yicha o‘quv platformasi: 14 modul, 3 darajali testlar, mashqlar va 14 laboratoriya simulyatori.">
+<meta name="description" content="Elektr va magnetizm bo‘yicha o‘quv platformasi: 14 modul, 3 darajali testlar, Bilish–Qo‘llash–Mulohaza mashqlari va 14 laboratoriya simulyatori.">
 <meta name="theme-color" content="#070B11">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2210%22 fill=%22%230E1620%22/%3E%3Cpath d=%22M11 29V17a9 9 0 0 1 18 0v12%22 stroke=%22%23FF5B8A%22 stroke-width=%223.4%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M11 29h5.2M23.8 29H29%22 stroke=%22%232BD9C9%22 stroke-width=%223.4%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html,body{height:100%}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
@@ -359,6 +359,42 @@ table.data tr:last-child td{border-bottom:0}
 .extlink svg{width:15px;height:15px;flex:none;opacity:.7}
 .extlink span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
+/* ---------- tor ekranda toshib ketmaslik ---------- */
+.grid>*{min-width:0}
+.tscroll{min-width:0;max-width:100%}
+.simwrap,.card{min-width:0}
+
+/* ---------- mashq toifalari ---------- */
+.catlegend{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.catleg{border-left:3px solid var(--c);padding-left:12px}
+.catleg b{display:block;font-size:14.5px;color:var(--c)}
+.catleg span{font-size:12.5px;color:var(--fg2)}
+.catbadge{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:var(--c,var(--volt));
+  background:color-mix(in srgb,var(--c,var(--volt)) 13%,transparent);
+  border:1px solid color-mix(in srgb,var(--c,var(--volt)) 40%,transparent)}
+.catcard{border-left:3px solid var(--c)}
+.catcard .mcard:hover{border-color:var(--c)}
+.catcard .mcard.done .mnum{background:color-mix(in srgb,var(--c) 18%,transparent);border-color:var(--c);color:var(--c)}
+
+/* ---------- xatolik jadvali ---------- */
+.errgrid{display:grid;gap:12px}
+.errtbl{width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:13.5px}
+.errtbl th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.01em;
+  color:var(--fg3);padding:7px 9px;border-bottom:1px solid var(--line)}
+.errtbl td{padding:4px 6px;border-bottom:1px solid var(--line)}
+.errtbl td.idx{color:var(--fg3);width:34px;text-align:center}
+.errtbl input{width:100%;min-width:56px;background:var(--panel2);border:1px solid var(--line);
+  border-radius:7px;padding:7px 9px;font-family:var(--f-mono);font-size:14px;font-variant-numeric:tabular-nums;outline:none}
+.errtbl input:focus{border-color:var(--volt)}
+.errtbl td.calc{font-variant-numeric:tabular-nums;color:var(--fg2)}
+.errout{display:grid;gap:9px;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.errout .ro b{font-size:16px}
+.errfinal{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--ok);
+  border-radius:10px;padding:12px 15px;font-family:"STIX Two Text",Cambria,serif;font-size:17px}
+.errnote{font-size:14px;color:var(--fg);background:color-mix(in srgb,var(--amp) 10%,var(--panel));
+  border:1px solid color-mix(in srgb,var(--amp) 35%,var(--line));border-radius:10px;padding:12px 15px}
+.errnote b{color:var(--amp)}
 .empty{text-align:center;padding:34px 18px;color:var(--fg3)}
 .empty svg{width:40px;height:40px;opacity:.5;margin-bottom:10px}
 .toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
@@ -427,6 +463,131 @@ table.data tr:last-child td{border-bottom:0}
   <main class="main"><div class="wrap" id="view"></div></main>
 </div>
 <div id="toastHost" aria-live="polite"></div>
+<style>
+/* ---------- matematik terish ---------- */
+.m{font-family:"STIX Two Text","Cambria Math",Cambria,"Times New Roman",serif;
+   font-size:1.14em;line-height:1.5;white-space:nowrap;letter-spacing:0}
+.m .mv{font-style:italic}
+.m .mn,.m .mtext,.m .mfn{font-style:normal}
+.m .mfn{padding-right:.08em}
+.m .mo{font-style:normal;padding:0 .26em}
+.m .mo.tight{padding:0 .1em}
+.m .mo.fence{padding:0}
+.m sub,.m sup{font-size:.68em;font-style:normal;line-height:0}
+.m sub{vertical-align:-.28em}
+.m sup{vertical-align:.55em}
+.m sub .mv,.m sup .mv{font-style:italic}
+.m .msp{display:inline-block;width:.22em}
+.m .msp2{display:inline-block;width:.45em}
+.mfrac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .22em}
+.mfrac>span{display:block;padding:0 .34em}
+.mfrac>span:first-child{border-bottom:1.1px solid currentColor;padding-bottom:.1em}
+.mfrac>span:last-child{padding-top:.1em}
+.msqrt{display:inline-flex;align-items:stretch;margin:0 .1em;vertical-align:middle}
+.msqrt>.mradbox{position:relative;width:.6em;flex:none;align-self:stretch}
+.msqrt>.mradbox>svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+.msqrt>.mund{border-top:1.5px solid currentColor;padding:.12em .24em 0 .04em}
+.mvec{position:relative;display:inline-block;padding-top:.1em}
+.mvec::after{content:"⃗";position:absolute;left:0;right:0;top:-.52em;text-align:center;font-size:.92em}
+/* formula qutisi */
+.fml{font-family:"STIX Two Text","Cambria Math",Cambria,serif;font-size:16px;
+  background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--volt);
+  border-radius:8px;padding:11px 15px;display:block;overflow-x:auto;overflow-y:hidden}
+.fml .m{font-size:1.06em}
+.fmlrow{display:grid;gap:4px}
+.fmlrow .fname{font-size:12.5px;color:var(--fg2);font-family:var(--f-body)}
+.inlm{font-family:"STIX Two Text",Cambria,serif;font-size:1.05em}
+</style>
+<script>
+/* ============ KICHIK MATEMATIK TERGICH ============
+   Qo‘llab-quvvatlanadi: \frac{}{}  \sqrt{}  \vec{}  \abs{}  \text{}
+   _{...} ^{...} (yoki bitta belgi), \, va \; — bo‘sh joy. */
+(function(){
+  const FN=['sin','cos','tg','ctg','ctg','arcsin','arccos','ln','lg','log','exp','const','max','min','sh','ch'];
+  const UP_GREEK='ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ';
+  const LO_GREEK='αβγδεζηθικλμνξοπρστυφχψω';
+  const OPS='=+−-±×<>≤≥≈≡⇒→';
+  const TIGHT='·⋅';
+  const RADSVG='<span class="mradbox"><svg viewBox="0 0 12 100" preserveAspectRatio="none" aria-hidden="true">'+
+    '<path d="M0.5 58 L3.4 58 L6.6 95 L11.5 2.5" fill="none" stroke="currentColor" stroke-width="1.5" '+
+    'vector-effect="non-scaling-stroke" stroke-linejoin="miter" stroke-linecap="round"/></svg></span>';
+  function e(s){ return String(s).replace(/[&<>]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;'})[c];}); }
+
+  window.mathHTML = function(src){
+    const s=String(src==null?'':src);
+    let i=0;
+    function grp(){
+      if(s[i]!=='{') return atomOne();
+      i++; const r=parse('}'); if(s[i]==='}') i++; return r;
+    }
+    function grpRaw(){
+      if(s[i]!=='{') return '';
+      i++; let out=''; let d=1;
+      while(i<s.length){ if(s[i]==='{') d++; else if(s[i]==='}'){ d--; if(!d){ i++; break; } } out+=s[i++]; }
+      return out;
+    }
+    function atomOne(){
+      const ch=s[i]; if(ch===undefined) return '';
+      i++;
+      if(/[0-9]/.test(ch)) return '<span class="mn">'+ch+'</span>';
+      if(/[A-Za-z]/.test(ch) || LO_GREEK.indexOf(ch)>=0) return '<span class="mv">'+e(ch)+'</span>';
+      return '<span class="mn">'+e(ch)+'</span>';
+    }
+    function parse(stop){
+      let out='';
+      while(i<s.length){
+        const ch=s[i];
+        if(stop && ch===stop) return out;
+        if(ch==='\\'){
+          const mm=/^\\([a-zA-Z]+|,|;)/.exec(s.slice(i));
+          if(!mm){ i++; continue; }
+          const cmd=mm[1]; i+=mm[0].length;
+          if(cmd==='frac'){ const a=grp(), b=grp();
+            out+='<span class="mfrac"><span>'+a+'</span><span>'+b+'</span></span>'; continue; }
+          if(cmd==='sqrt'){ const a=grp();
+            out+='<span class="msqrt">'+RADSVG+'<span class="mund">'+a+'</span></span>'; continue; }
+          if(cmd==='vec'){ const a=grp(); out+='<span class="mvec">'+a+'</span>'; continue; }
+          if(cmd==='abs'){ const a=grp();
+            out+='<span class="mo fence">|</span>'+a+'<span class="mo fence">|</span>'; continue; }
+          if(cmd==='text'){ out+='<span class="mtext">'+e(grpRaw())+'</span>'; continue; }
+          if(cmd===','){ out+='<span class="msp"></span>'; continue; }
+          if(cmd===';'){ out+='<span class="msp2"></span>'; continue; }
+          continue;
+        }
+        if(ch==='_'||ch==='^'){
+          i++; const a=grp();
+          out+=(ch==='_'?'<sub>':'<sup>')+a+(ch==='_'?'</sub>':'</sup>'); continue;
+        }
+        if(/[0-9]/.test(ch)){
+          let n=''; while(i<s.length && /[0-9.,]/.test(s[i])){
+            if(s[i]===',' && !/[0-9]/.test(s[i+1]||'')) break;
+            n+=s[i++];
+          }
+          out+='<span class="mn">'+n+'</span>'; continue;
+        }
+        if(/[A-Za-z]/.test(ch)){
+          let w=''; let j=i;
+          while(j<s.length && /[A-Za-z]/.test(s[j])) w+=s[j++];
+          let hit=null;
+          for(let f=0;f<FN.length;f++){ if(w.toLowerCase().indexOf(FN[f])===0 && (!hit || FN[f].length>hit.length)) hit=FN[f]; }
+          if(hit){ i+=hit.length; out+='<span class="mfn">'+hit+'</span>'; continue; }
+          i++; out+='<span class="mv">'+e(ch)+'</span>'; continue;
+        }
+        if(LO_GREEK.indexOf(ch)>=0){ i++; out+='<span class="mv">'+ch+'</span>'; continue; }
+        if(UP_GREEK.indexOf(ch)>=0){ i++; out+='<span class="mn">'+ch+'</span>'; continue; }
+        if(OPS.indexOf(ch)>=0){ i++; out+='<span class="mo">'+e(ch)+'</span>'; continue; }
+        if(TIGHT.indexOf(ch)>=0){ i++; out+='<span class="mo tight">·</span>'; continue; }
+        if(ch==='/'){ i++; out+='<span class="mo tight">/</span>'; continue; }
+        if('()[]|'.indexOf(ch)>=0){ i++; out+='<span class="mo fence">'+e(ch)+'</span>'; continue; }
+        if(ch===' '){ i++; out+='<span class="msp"></span>'; continue; }
+        i++; out+='<span class="mn">'+e(ch)+'</span>';
+      }
+      return out;
+    }
+    return '<span class="m">'+parse(null)+'</span>';
+  };
+})();
+</script>
 <script>
 /* ============ MA'RUZA MAVZULARI (14 modul) ============ */
 const SECTIONS = [
@@ -447,10 +608,10 @@ const MODULES = [
     {h:'Kuch chiziqlari va superpozitsiya', p:'Kuch chiziqlari — har bir nuqtasidagi urinma E vektori yo‘nalishi bilan mos tushadigan chiziqlar. Ular musbat zaryadda boshlanib manfiy zaryadda tugaydi, kesishmaydi; zichligi maydon kuchliligini ko‘rsatadi. Bir necha zaryad maydoni superpozitsiya prinsipi bo‘yicha qo‘shiladi: E = E₁ + E₂ + … (vektorlar yig‘indisi).'}
   ],
   formulas:[
-    {n:'Kulon qonuni', f:'F = k · |q<sub>1</sub>·q<sub>2</sub>| / (ε·r<sup>2</sup>),&nbsp; k = 9·10<sup>9</sup> N·m²/C²'},
-    {n:'Maydon kuchlanganligi', f:'E = F / q<sub>0</sub>&nbsp;&nbsp;[N/C = V/m]'},
-    {n:'Nuqtaviy zaryad maydoni', f:'E = k·|q| / (ε·r<sup>2</sup>)'},
-    {n:'Superpozitsiya', f:'E⃗ = E⃗<sub>1</sub> + E⃗<sub>2</sub> + … + E⃗<sub>n</sub>'}
+    {n:'Kulon qonuni · k = 9·10⁹ N·m²/C²', f:'F = k·\\frac{\\abs{q_1·q_2}}{ε·r^2}'},
+    {n:'Maydon kuchlanganligi · [N/C = V/m]', f:'E = \\frac{F}{q_0}'},
+    {n:'Nuqtaviy zaryad maydoni', f:'E = \\frac{k·\\abs{q}}{ε·r^2}'},
+    {n:'Superpozitsiya prinsipi', f:'\\vec{E} = \\vec{E}_1 + \\vec{E}_2 + … + \\vec{E}_n'}
   ],
   terms:[
     {t:'Elementar zaryad', d:'e = 1,6·10⁻¹⁹ C — eng kichik ajralmas zaryad.'},
@@ -469,10 +630,11 @@ const MODULES = [
     {h:'E va U orasidagi bog‘lanish', p:'Bir jinsli maydonda kuchlanganlik kuchlanishning masofaga nisbatiga teng: E = U/d. Shu sababli kuchlanganlikni V/m da ifodalash mumkin. Formula kondensator ichidagi maydonni, elektronning tezlanishini va ko‘plab amaliy hisoblarni tez bajarishga imkon beradi.'}
   ],
   formulas:[
-    {n:'Maydon ishi', f:'A = q·(φ<sub>1</sub> − φ<sub>2</sub>) = q·U'},
-    {n:'Potensial', f:'φ = W / q,&nbsp;&nbsp; nuqtaviy zaryad: φ = k·q / (ε·r)'},
-    {n:'Bir jinsli maydon', f:'E = U / d&nbsp;&nbsp;⇒&nbsp;&nbsp;U = E·d'},
-    {n:'Tezlanish ishi', f:'q·U = m·v<sup>2</sup>/2&nbsp;&nbsp;(boshlang‘ich tezlik nol bo‘lsa)'}
+    {n:'Maydon kuchlarining ishi', f:'A = q·(φ_1 − φ_2) = q·U'},
+    {n:'Potensial', f:'φ = \\frac{W}{q}'},
+    {n:'Nuqtaviy zaryad potensiali', f:'φ = \\frac{k·q}{ε·r}'},
+    {n:'Bir jinsli maydon', f:'E = \\frac{U}{d} \\;\\;⇒\\;\\; U = E·d'},
+    {n:'Zaryadning tezlanishi', f:'q·U = \\frac{m·v^2}{2}'}
   ],
   terms:[
     {t:'Volt', d:'1 V — 1 C zaryadni ko‘chirishda 1 J ish bajariladigan potensiallar farqi.'},
@@ -491,10 +653,11 @@ const MODULES = [
     {h:'Ulash usullari va energiya', p:'Parallel ulashda kuchlanish bir xil, sig‘imlar qo‘shiladi: C = C₁+C₂+… Ketma-ket ulashda zaryad bir xil, teskari sig‘imlar qo‘shiladi: 1/C = 1/C₁+1/C₂+… Zaryadlangan kondensator maydonida energiya saqlanadi: W = CU²/2 = qU/2 = q²/(2C). Bu energiya fotoapparat chaqnog‘i, defibrillyator va impuls qurilmalarida ishlatiladi.'}
   ],
   formulas:[
-    {n:'Sig‘im', f:'C = q / U&nbsp;&nbsp;[F]'},
-    {n:'Yassi kondensator', f:'C = ε·ε<sub>0</sub>·S / d,&nbsp; ε<sub>0</sub> = 8,85·10<sup>−12</sup> F/m'},
-    {n:'Parallel / ketma-ket', f:'C<sub>par</sub> = ΣC<sub>i</sub>&nbsp;&nbsp;|&nbsp;&nbsp;1/C<sub>ket</sub> = Σ(1/C<sub>i</sub>)'},
-    {n:'Energiya', f:'W = C·U<sup>2</sup>/2 = q·U/2 = q<sup>2</sup>/(2C)'}
+    {n:'Elektr sig‘imi · [F]', f:'C = \\frac{q}{U}'},
+    {n:'Yassi kondensator · ε₀ = 8,85·10⁻¹² F/m', f:'C = \\frac{ε·ε_0·S}{d}'},
+    {n:'Parallel ulash', f:'C = C_1 + C_2 + … + C_n'},
+    {n:'Ketma-ket ulash', f:'\\frac{1}{C} = \\frac{1}{C_1} + \\frac{1}{C_2} + …'},
+    {n:'Maydon energiyasi', f:'W = \\frac{C·U^2}{2} = \\frac{q·U}{2} = \\frac{q^2}{2C}'}
   ],
   terms:[
     {t:'Farad', d:'1 F — 1 V kuchlanishda 1 C zaryad to‘playdigan sig‘im (juda katta birlik).'},
@@ -513,11 +676,11 @@ const MODULES = [
     {h:'Ulash usullari va harorat', p:'Ketma-ket ulashda tok bir xil, qarshiliklar qo‘shiladi: R = R₁+R₂+…, kuchlanish qarshilikka proporsional taqsimlanadi. Parallel ulashda kuchlanish bir xil, teskari qarshiliklar qo‘shiladi: 1/R = 1/R₁+1/R₂+…, umumiy qarshilik eng kichik qarshilikdan ham kichik bo‘ladi. Metallarda harorat ortsa qarshilik ortadi: R = R₀(1 + α·Δt); yarimo‘tkazgichlarda esa, aksincha, kamayadi.'}
   ],
   formulas:[
-    {n:'Tok kuchi', f:'I = q / t = n·e·S·v<sub>dreyf</sub>&nbsp;&nbsp;[A]'},
-    {n:'Om qonuni (qism)', f:'I = U / R&nbsp;&nbsp;⇒&nbsp;&nbsp;U = I·R'},
-    {n:'Qarshilik', f:'R = ρ·l / S'},
-    {n:'Ulash', f:'R<sub>ket</sub> = ΣR<sub>i</sub>&nbsp;&nbsp;|&nbsp;&nbsp;1/R<sub>par</sub> = Σ(1/R<sub>i</sub>)'},
-    {n:'Harorat bog‘liqligi', f:'R = R<sub>0</sub>·(1 + α·Δt)'}
+    {n:'Tok kuchi · [A]', f:'I = \\frac{q}{t} = n·e·S·v'},
+    {n:'Om qonuni (zanjir qismi)', f:'I = \\frac{U}{R} \\;\\;⇒\\;\\; U = I·R'},
+    {n:'O‘tkazgich qarshiligi', f:'R = \\frac{ρ·l}{S}'},
+    {n:'Ketma-ket va parallel ulash', f:'R = R_1 + R_2 \\;\\;\\;\\; \\frac{1}{R} = \\frac{1}{R_1} + \\frac{1}{R_2}'},
+    {n:'Harorat bog‘liqligi', f:'R = R_0·(1 + α·Δt)'}
   ],
   terms:[
     {t:'Amper', d:'1 A — 1 s da 1 C zaryad o‘tadigan tok.'},
@@ -536,11 +699,11 @@ const MODULES = [
     {h:'Kirxgof qoidalari va FIK', p:'Birinchi qoida: tugunga kelgan toklar yig‘indisi undan ketgan toklar yig‘indisiga teng (ΣI = 0). Ikkinchi qoida: berk kontur bo‘ylab kuchlanish tushishlari yig‘indisi EYuK lar yig‘indisiga teng (ΣI·R = Σε). Manbaning FIK si foydali quvvatning to‘liq quvvatga nisbati: η = R/(R+r). Maksimal foydali quvvat R = r shartida, lekin bunda η faqat 50% bo‘ladi.'}
   ],
   formulas:[
-    {n:'To‘liq zanjir', f:'I = ε / (R + r)'},
+    {n:'To‘liq zanjir uchun Om qonuni', f:'I = \\frac{ε}{R + r}'},
     {n:'Qisqich kuchlanishi', f:'U = ε − I·r'},
-    {n:'Quvvat', f:'P = U·I = I<sup>2</sup>·R = U<sup>2</sup>/R'},
-    {n:'Joul–Lens', f:'Q = I<sup>2</sup>·R·t'},
-    {n:'FIK', f:'η = R/(R+r) = U/ε'}
+    {n:'Tok quvvati', f:'P = U·I = I^2·R = \\frac{U^2}{R}'},
+    {n:'Joul–Lens qonuni', f:'Q = I^2·R·t'},
+    {n:'Manbaning FIK si', f:'η = \\frac{R}{R + r} = \\frac{U}{ε}'}
   ],
   terms:[
     {t:'Qisqa tutashuv', d:'R ≈ 0 holat; tok I = ε/r gacha o‘sadi.'},
@@ -559,10 +722,10 @@ const MODULES = [
     {h:'p–n o‘tish, diod va tranzistor', p:'p va n sohalar chegarasida to‘siq qatlami yuzaga keladi. To‘g‘ri ulashda (p ga «+») to‘siq pasayadi va tok o‘tadi; teskari ulashda to‘siq kengayadi va tok amalda nolga teng — bu diodning bir tomonlama o‘tkazuvchanligi, to‘g‘rilagichlar asosi. Uch sohali tuzilma (n–p–n yoki p–n–p) tranzistor bo‘lib, kichik baza toki bilan katta kollektor tokini boshqaradi — kuchaytirish va kalit vazifasi.'}
   ],
   formulas:[
-    {n:'Faradeyning I qonuni', f:'m = k·q = k·I·t'},
-    {n:'Faradeyning II qonuni', f:'k = M / (F·n),&nbsp; F = 96500 C/mol'},
-    {n:'Birlashgan shakl', f:'m = (M / (F·n))·I·t'},
-    {n:'Termistor', f:'R haroratga teskari — t↑ ⇒ R↓'}
+    {n:'Faradeyning birinchi qonuni', f:'m = k·q = k·I·t'},
+    {n:'Faradeyning ikkinchi qonuni · F = 96500 C/mol', f:'k = \\frac{M}{F·n}'},
+    {n:'Birlashgan shakl', f:'m = \\frac{M}{F·n}·I·t'},
+    {n:'Tok zichligi', f:'j = \\frac{I}{S}'}
   ],
   terms:[
     {t:'Elektrokimyoviy ekvivalent k', d:'1 C zaryad o‘tganda ajraladigan modda massasi.'},
@@ -581,10 +744,11 @@ const MODULES = [
     {h:'Amaliy qo‘llanishi', p:'Amper kuchi elektr dvigatel asosida yotadi: ramka magnit maydonda aylantiruvchi moment oladi, kollektor har yarim aylanada tok yo‘nalishini o‘zgartirib aylanishni davom ettiradi. Shuningdek u elektromagnit o‘lchov asboblari (ampermetr, voltmetr), dinamik va magnit-levitatsiya qurilmalarida ishlatiladi.'}
   ],
   formulas:[
-    {n:'Amper kuchi', f:'F = B·I·l·sinα&nbsp;&nbsp;[N]'},
-    {n:'To‘g‘ri tok maydoni', f:'B = μ<sub>0</sub>·I / (2π·r),&nbsp; μ<sub>0</sub> = 4π·10<sup>−7</sup> T·m/A'},
-    {n:'Halqa markazida', f:'B = μ<sub>0</sub>·I / (2R)'},
-    {n:'Solenoid ichida', f:'B = μ<sub>0</sub>·μ·n·I,&nbsp; n = N/l'}
+    {n:'Amper kuchi · [N]', f:'F = B·I·l·sinα'},
+    {n:'To‘g‘ri tok maydoni · μ₀ = 4π·10⁻⁷ T·m/A', f:'B = \\frac{μ_0·I}{2π·r}'},
+    {n:'Halqa markazida', f:'B = \\frac{μ_0·I}{2R}'},
+    {n:'Solenoid ichida · n = N/l', f:'B = μ_0·μ·n·I'},
+    {n:'Ramkaga ta’sir etuvchi moment', f:'M = B·I·S·N·sinα'}
   ],
   terms:[
     {t:'Tesla', d:'1 T — 1 m uzunlikdagi 1 A tokli o‘tkazgichga 1 N kuch bilan ta’sir etuvchi maydon.'},
@@ -604,9 +768,9 @@ const MODULES = [
   ],
   formulas:[
     {n:'Lorens kuchi', f:'F = q·v·B·sinα'},
-    {n:'Aylana radiusi', f:'r = m·v / (q·B)'},
-    {n:'Aylanish davri', f:'T = 2π·m / (q·B)&nbsp;&nbsp;(v ga bog‘liq emas)'},
-    {n:'Tezlatish', f:'q·U = m·v<sup>2</sup>/2&nbsp;&nbsp;⇒&nbsp;&nbsp;v = √(2qU/m)'}
+    {n:'Aylana radiusi', f:'r = \\frac{m·v}{q·B}'},
+    {n:'Aylanish davri — tezlikka bog‘liq emas', f:'T = \\frac{2π·m}{q·B}'},
+    {n:'Tezlatish', f:'q·U = \\frac{m·v^2}{2} \\;\\;⇒\\;\\; v = \\sqrt{\\frac{2qU}{m}}'}
   ],
   terms:[
     {t:'Kyuri nuqtasi', d:'Ferromagnetik magnit xossasini yo‘qotadigan harorat (temir uchun 770 °C).'},
@@ -625,10 +789,10 @@ const MODULES = [
     {h:'Harakatlanuvchi o‘tkazgichda EYuK', p:'Magnit maydonda v tezlik bilan harakatlanayotgan l uzunlikdagi o‘tkazgichda EYuK ε = B·l·v·sinα hosil bo‘ladi. Bu generator ishlashining asosi: ramka bir tekis aylanganda sinusoidal EYuK yuzaga keladi. Induksiya hodisasi transformator, induksion plita, elektromagnit tormoz va kartochkali o‘quvchilarda qo‘llanadi.'}
   ],
   formulas:[
-    {n:'Magnit oqimi', f:'Φ = B·S·cosα&nbsp;&nbsp;[Wb]'},
-    {n:'Induksiya qonuni', f:'ε = −ΔΦ/Δt;&nbsp; g‘altak uchun ε = −N·ΔΦ/Δt'},
-    {n:'Harakatlanuvchi o‘tkazgich', f:'ε = B·l·v·sinα'},
-    {n:'Induksiya toki', f:'I = ε / (R + r)'}
+    {n:'Magnit oqimi · [Wb]', f:'Φ = B·S·cosα'},
+    {n:'Elektromagnit induksiya qonuni', f:'ε = −N·\\frac{ΔΦ}{Δt}'},
+    {n:'Harakatlanuvchi o‘tkazgichda', f:'ε = B·l·v·sinα'},
+    {n:'Induksiya toki', f:'I = \\frac{ε}{R + r}'}
   ],
   terms:[
     {t:'Veber', d:'1 Wb — 1 s da bir tekis nolga kamayganda 1 V EYuK beradigan oqim.'},
@@ -647,10 +811,10 @@ const MODULES = [
     {h:'Magnit maydon energiyasi', p:'Tokli g‘altak magnit maydonida energiya saqlanadi: W = L·I²/2. Bu energiya manba hisobidan tok o‘sish paytida to‘planadi va zanjir uzilganda qaytib beriladi. Shu sababli induktiv zanjirni uzish paytida uchqun va yuqori kuchlanish hosil bo‘ladi — bu xossa impuls transformatori va alangalanish tizimida ishlatiladi.'}
   ],
   formulas:[
-    {n:'Induktivlik', f:'L = Φ / I&nbsp;&nbsp;[H]'},
-    {n:'O‘zinduksiya EYuK', f:'ε = −L·ΔI/Δt'},
-    {n:'Magnit maydon energiyasi', f:'W = L·I<sup>2</sup> / 2'},
-    {n:'Solenoid induktivligi', f:'L = μ<sub>0</sub>·μ·n<sup>2</sup>·V'}
+    {n:'Induktivlik · [H]', f:'L = \\frac{Φ}{I}'},
+    {n:'O‘zinduksiya EYuK', f:'ε = −L·\\frac{ΔI}{Δt}'},
+    {n:'Magnit maydon energiyasi', f:'W = \\frac{L·I^2}{2}'},
+    {n:'Solenoid induktivligi', f:'L = μ_0·μ·n^2·V'}
   ],
   terms:[
     {t:'Genri', d:'1 H — tok 1 A/s tezlikda o‘zgarganda 1 V EYuK beradigan induktivlik.'},
@@ -669,10 +833,10 @@ const MODULES = [
     {h:'Majburiy tebranishlar va rezonans', p:'Konturga o‘zgaruvchan EYuK ulansa majburiy tebranishlar yuzaga keladi va ularning chastotasi tashqi EYuK chastotasiga teng bo‘ladi. Tashqi chastota xususiy chastotaga yaqinlashganda amplituda keskin ortadi — elektr rezonansi. Rezonans radiopriyomnikni sozlashda foydali, lekin kuch zanjirlarida xavfli yuqori kuchlanishga olib keladi.'}
   ],
   formulas:[
-    {n:'Tomson formulasi', f:'T = 2π·√(L·C)'},
-    {n:'Xususiy chastota', f:'ν = 1 / (2π√(LC)),&nbsp; ω = 1/√(LC)'},
-    {n:'Energiya saqlanishi', f:'q<sup>2</sup>/(2C) + L·I<sup>2</sup>/2 = const'},
-    {n:'Amplituda bog‘lanishi', f:'I<sub>m</sub> = q<sub>m</sub>·ω = U<sub>m</sub>·√(C/L)'}
+    {n:'Tomson formulasi', f:'T = 2π·\\sqrt{L·C}'},
+    {n:'Xususiy chastota', f:'ν = \\frac{1}{2π\\sqrt{LC}} \\;\\;\\;\\; ω = \\frac{1}{\\sqrt{LC}}'},
+    {n:'Energiyaning saqlanishi', f:'\\frac{q^2}{2C} + \\frac{L·I^2}{2} = const'},
+    {n:'Amplitudalar bog‘lanishi', f:'I_m = q_m·ω = U_m·\\sqrt{\\frac{C}{L}}'}
   ],
   terms:[
     {t:'Erkin tebranish', d:'Tashqi ta’sirsiz, faqat kontur energiyasi hisobiga sodir bo‘ladi.'},
@@ -691,11 +855,11 @@ const MODULES = [
     {h:'Transformator va energiya uzatish', p:'Transformator ikki o‘ramli g‘altak va umumiy magnit o‘zakdan iborat; faqat o‘zgaruvchan tokda ishlaydi. Transformatsiya koeffitsiyenti k = N₁/N₂ = U₁/U₂. Ideal transformatorda quvvat saqlanadi: U₁I₁ = U₂I₂, ya’ni kuchlanish ortsa tok kamayadi. Uzatish liniyalarida yo‘qotish Q = I²Rt bo‘lgani uchun energiya yuqori kuchlanishda uzatiladi, iste’molchi oldida esa pasaytiriladi.'}
   ],
   formulas:[
-    {n:'Effektiv qiymatlar', f:'I = I<sub>m</sub>/√2,&nbsp; U = U<sub>m</sub>/√2'},
-    {n:'Reaktiv qarshiliklar', f:'X<sub>L</sub> = ω·L,&nbsp; X<sub>C</sub> = 1/(ω·C),&nbsp; ω = 2πν'},
-    {n:'Impedans', f:'Z = √(R<sup>2</sup> + (X<sub>L</sub> − X<sub>C</sub>)<sup>2</sup>)'},
+    {n:'Effektiv qiymatlar', f:'I = \\frac{I_m}{\\sqrt{2}} \\;\\;\\;\\; U = \\frac{U_m}{\\sqrt{2}}'},
+    {n:'Reaktiv qarshiliklar · ω = 2πν', f:'X_L = ω·L \\;\\;\\;\\; X_C = \\frac{1}{ω·C}'},
+    {n:'To‘liq qarshilik (impedans)', f:'Z = \\sqrt{R^2 + (X_L − X_C)^2}'},
     {n:'Aktiv quvvat', f:'P = U·I·cosφ'},
-    {n:'Transformator', f:'k = N<sub>1</sub>/N<sub>2</sub> = U<sub>1</sub>/U<sub>2</sub> = I<sub>2</sub>/I<sub>1</sub>'}
+    {n:'Transformator', f:'k = \\frac{N_1}{N_2} = \\frac{U_1}{U_2} = \\frac{I_2}{I_1}'}
   ],
   terms:[
     {t:'Effektiv qiymat', d:'Shu kattalikdagi o‘zgarmas tok bilan bir xil issiqlik beradigan qiymat.'},
@@ -714,10 +878,10 @@ const MODULES = [
     {h:'To‘lqinlar shkalasi', p:'Chastota (yoki λ) bo‘yicha: radio to‘lqinlar (λ > 1 mm), infraqizil, ko‘rinuvchi yorug‘lik (380–760 nm), ultrabinafsha, rentgen va gamma nurlar. Barchasining tabiati bir xil, farqi faqat chastotada va shu sababli hosil bo‘lish hamda ta’sir mexanizmida. Chastota ortishi bilan to‘lqin xossalari susayib, zarracha (kvant) xossalari kuchayadi.'}
   ],
   formulas:[
-    {n:'To‘lqin uzunligi', f:'λ = v / ν = v·T,&nbsp; vakuumda v = c = 3·10<sup>8</sup> m/s'},
-    {n:'Muhitdagi tezlik', f:'v = c / √(ε·μ)'},
-    {n:'Maksvell munosabati', f:'c = 1 / √(ε<sub>0</sub>·μ<sub>0</sub>)'},
-    {n:'Ko‘rinuvchi yorug‘lik', f:'λ ≈ 380…760 nm'}
+    {n:'To‘lqin uzunligi · vakuumda v = c = 3·10⁸ m/s', f:'λ = \\frac{v}{ν} = v·T'},
+    {n:'Muhitdagi tezlik', f:'v = \\frac{c}{\\sqrt{ε·μ}}'},
+    {n:'Maksvell munosabati', f:'c = \\frac{1}{\\sqrt{ε_0·μ_0}}'},
+    {n:'Ko‘rinuvchi yorug‘lik', f:'λ ≈ 380…760\\text{ nm}'}
   ],
   terms:[
     {t:'Siljish toki', d:'O‘zgaruvchan elektr maydon; magnit maydon vujudga keltiradi.'},
@@ -736,10 +900,10 @@ const MODULES = [
     {h:'Zamonaviy aloqa', p:'Mobil aloqa hududni uyachalarga (sota) bo‘lib, har uyachada baza stansiyasi ishlashiga asoslangan — shu sababli u uyali aloqa deyiladi. Raqamli uzatishda signal diskretlanadi va kodlanadi, bu shovqinga chidamlilikni oshiradi. Yo‘ldosh aloqasi, optik tolali liniyalar, Wi-Fi va GPS — barchasi elektromagnit to‘lqinlarning turli diapazonlaridan foydalanadi.'}
   ],
   formulas:[
-    {n:'Radiolokatsiya', f:'R = c·t / 2'},
-    {n:'Antenna uzunligi', f:'l ≈ λ/4&nbsp;&nbsp;(chorak to‘lqinli antenna)'},
-    {n:'To‘lqin uzunligi', f:'λ = c / ν'},
-    {n:'Diapazonlar', f:'UZ: 1…10 km · QT: 10…100 m · UQT: 1…10 m'}
+    {n:'Radiolokatsiya', f:'R = \\frac{c·t}{2}'},
+    {n:'Chorak to‘lqinli antenna', f:'l ≈ \\frac{λ}{4}'},
+    {n:'To‘lqin uzunligi', f:'λ = \\frac{c}{ν}'},
+    {n:'Radio diapazonlari', f:'\\text{UZ: 1…10 km · QT: 10…100 m · UQT: 1…10 m}'}
   ],
   terms:[
     {t:'Tashuvchi to‘lqin', d:'Ma’lumot «yozilgan» yuqori chastotali to‘lqin.'},
@@ -1055,324 +1219,572 @@ const Q_BY_M = {};
 QUESTIONS.forEach(function(x){ (Q_BY_M[x.m] = Q_BY_M[x.m] || []).push(x); });
 </script>
 <script>
-/* ============ MASHQLAR — har mavzuda 3 daraja ============ */
+/* ============ MASHQLAR — har mavzuda 3 toifa × 2 ta ============ */
+const EXCATS = {
+  bilish:{n:'Bilish', d:'Ta’rif, birlik, kattalik va formulani tanib olish', c:'var(--volt)'},
+  qollash:{n:'Qo‘llash', d:'Formulaga qo‘yib son javobini topish', c:'var(--amp)'},
+  mulohaza:{n:'Mulohaza', d:'Tahlil, taqqoslash, teskari va ko‘p bosqichli masalalar', c:'var(--mag)'}
+};
+const CAT_ORDER = ['bilish','qollash','mulohaza'];
+
 let _eid = 0;
-function ex(m,lvl,sub,tag,text,given,ans,unit,tol,hints,steps){
-  _eid++; return {id:'e'+_eid,m:m,lvl:lvl,sub:sub,tag:tag,q:text,given:given,
+function exn(m,cat,sub,tag,text,given,ans,unit,tol,hints,steps){
+  _eid++; return {id:'e'+_eid,m:m,cat:cat,type:'num',sub:sub,tag:tag,q:text,given:given,
     ans:ans,unit:unit,tol:tol||0.02,hints:hints,steps:steps};
 }
+function exc(m,cat,sub,tag,text,opts,ans,why){
+  _eid++; return {id:'e'+_eid,m:m,cat:cat,type:'choice',sub:sub,tag:tag,q:text,opts:opts,ans:ans,why:why};
+}
+
 const EXERCISES = [
-/* 1 */
-ex(1,1,'Kulon qonuni','hisoblash','Vakuumda 0,2 m masofada turgan q₁ = 3·10⁻⁶ C va q₂ = 4·10⁻⁶ C zaryadlar orasidagi o‘zaro ta’sir kuchini toping.',
+/* ===== 1. Elektr zaryadi va elektr maydon ===== */
+exc(1,'bilish','Kulon qonuni','tushuncha','Kulon qonunidagi k koeffitsiyentining qiymati va birligi qaysi?',
+  ['9·10⁹ N·m²/C²','8,85·10⁻¹² F/m','1,6·10⁻¹⁹ C','6,02·10²³ mol⁻¹'],0,
+  'k = 1/(4πε₀) = 9·10⁹ N·m²/C². 8,85·10⁻¹² F/m — elektr doimiysi ε₀, 1,6·10⁻¹⁹ C — elementar zaryad, 6,02·10²³ — Avogadro soni.'),
+exn(1,'bilish','Zaryadning diskretligi','hisoblash','Jismda 5·10¹² ta ortiqcha elektron bor. Jism zaryadining modulini nanokulonda toping.',
+  [{s:'N',v:'5·10¹² ta'},{s:'e',v:'1,6·10⁻¹⁹ C'}],800,'nC',0.02,
+  ['Har qanday zaryad elementar zaryadga karrali: q = N·e.','1 nC = 10⁻⁹ C.'],
+  [{p:'Zaryadning diskretlik qonuni:',f:'q = N·e'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'q = 5·10^{12} · 1,6·10^{-19} = 8·10^{-7}\\text{ C}'},
+   {p:'Javob:',f:'q = 800\\text{ nC}'}]),
+exn(1,'qollash','Kulon qonuni','hisoblash','Vakuumda 0,2 m masofada turgan q₁ = 3·10⁻⁶ C va q₂ = 4·10⁻⁶ C zaryadlar orasidagi o‘zaro ta’sir kuchini toping.',
   [{s:'q₁',v:'3·10⁻⁶ C'},{s:'q₂',v:'4·10⁻⁶ C'},{s:'r',v:'0,2 m'},{s:'k',v:'9·10⁹ N·m²/C²'}],2.7,'N',0.02,
-  ['Kulon qonunidan foydalaning: F = k·q₁q₂/r².','r² = 0,04 m². Zaryadlar ko‘paytmasini oldin hisoblang: 1,2·10⁻¹¹.'],
-  [{p:'Kulon qonunini yozamiz (vakuum, ε = 1):',f:'F = k·q₁·q₂ / r²'},
-   {p:'Zaryadlar ko‘paytmasi va masofa kvadratini topamiz:',f:'q₁·q₂ = 1,2·10⁻¹¹ C²,&nbsp; r² = 0,04 m²'},
-   {p:'Qiymatlarni qo‘yamiz:',f:'F = 9·10⁹ · 1,2·10⁻¹¹ / 0,04 = 0,108 / 0,04'},
-   {p:'Javob:',f:'F = 2,7 N'}]),
-ex(1,2,'Maydon kuchlanganligi','hisoblash','q = 5·10⁻⁸ C nuqtaviy zaryaddan 10 sm masofadagi maydon kuchlanganligini toping.',
+  ['Kulon qonuni: F = k·q₁q₂/r².','r² = 0,04 m², zaryadlar ko‘paytmasi 1,2·10⁻¹¹.'],
+  [{p:'Kulon qonunini yozamiz (vakuum, ε = 1):',f:'F = \\frac{k·q_1·q_2}{r^2}'},
+   {p:'Oraliq kattaliklarni topamiz:',f:'q_1·q_2 = 1,2·10^{-11}\\;\\; r^2 = 0,04'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'F = \\frac{9·10^{9} · 1,2·10^{-11}}{0,04} = \\frac{0,108}{0,04}'},
+   {p:'Javob:',f:'F = 2,7\\text{ N}'}]),
+exn(1,'qollash','Maydon kuchlanganligi','hisoblash','q = 5·10⁻⁸ C nuqtaviy zaryaddan 10 sm masofadagi maydon kuchlanganligini toping.',
   [{s:'q',v:'5·10⁻⁸ C'},{s:'r',v:'10 sm'},{s:'ε',v:'1'}],4500,'N/C',0.02,
-  ['Nuqtaviy zaryad maydoni: E = k·q/r².','Santimetrni metrga aylantiring: 10 sm = 0,1 m, r² = 0,01 m².'],
-  [{p:'Nuqtaviy zaryad maydoni formulasi:',f:'E = k·q / (ε·r²)'},
-   {p:'Birliklarni SI ga keltiramiz:',f:'r = 0,1 m ⇒ r² = 0,01 m²'},
-   {p:'Hisoblaymiz:',f:'E = 9·10⁹ · 5·10⁻⁸ / 0,01 = 450 / 0,01'},
-   {p:'Javob:',f:'E = 4500 N/C = 4,5 kV/m'}]),
-ex(1,3,'Maydon kuchlanganligi','formula','q = 2·10⁻⁸ C zaryaddan qanday masofada maydon kuchlanganligi 2000 N/C ga teng bo‘ladi?',
+  ['Nuqtaviy zaryad maydoni: E = k·q/r².','10 sm = 0,1 m, demak r² = 0,01 m².'],
+  [{p:'Nuqtaviy zaryad maydoni:',f:'E = \\frac{k·q}{ε·r^2}'},
+   {p:'Birlikni SI ga keltiramiz:',f:'r = 0,1\\text{ m} \\;\\;⇒\\;\\; r^2 = 0,01'},
+   {p:'Hisoblaymiz:',f:'E = \\frac{9·10^{9} · 5·10^{-8}}{0,01} = \\frac{450}{0,01}'},
+   {p:'Javob:',f:'E = 4500\\text{ N/C}'}]),
+exn(1,'mulohaza','Maydon kuchlanganligi','formula','q = 2·10⁻⁸ C zaryaddan qanday masofada maydon kuchlanganligi 2000 N/C ga teng bo‘ladi?',
   [{s:'q',v:'2·10⁻⁸ C'},{s:'E',v:'2000 N/C'}],0.3,'m',0.03,
-  ['E = kq/r² formulasidan r ni ajratib oling.','r = √(kq/E). Ildiz ostidagi son 0,09 bo‘lishi kerak.'],
-  [{p:'Formuladan r² ni ajratamiz:',f:'E = k·q/r² ⇒ r² = k·q / E'},
-   {p:'Son qiymatlarini qo‘yamiz:',f:'r² = 9·10⁹ · 2·10⁻⁸ / 2000 = 180 / 2000 = 0,09'},
-   {p:'Ildiz olamiz:',f:'r = √0,09 = 0,3 m'},
-   {p:'Javob:',f:'r = 0,3 m = 30 sm'}]),
-/* 2 */
-ex(2,1,'Maydon ishi','hisoblash','q = 4·10⁻⁶ C zaryadni potensiallar farqi 150 V bo‘lgan nuqtalar orasida ko‘chirishda bajarilgan ishni toping.',
+  ['Formuladan r² ni ajratib oling: r² = kq/E.','Ildiz ostidagi son 0,09 chiqishi kerak.'],
+  [{p:'Formuladan r² ni ajratamiz:',f:'E = \\frac{k·q}{r^2} \\;\\;⇒\\;\\; r^2 = \\frac{k·q}{E}'},
+   {p:'Son qiymatlarini qo‘yamiz:',f:'r^2 = \\frac{9·10^{9} · 2·10^{-8}}{2000} = 0,09'},
+   {p:'Ildiz olamiz:',f:'r = \\sqrt{0,09} = 0,3'},
+   {p:'Javob:',f:'r = 0,3\\text{ m} = 30\\text{ sm}'}]),
+exn(1,'mulohaza','Muhit ta’siri','formula','Vakuumda ma’lum kuch bilan ta’sirlashuvchi ikki zaryad kerosinga (ε = 2) joylashtirildi va oralaridagi masofa 2 marta kamaytirildi. Kuch necha marta ortadi?',
+  [{s:'ε',v:'2'},{s:'r₂',v:'r₁/2'}],2,'marta',0.02,
+  ['Ikki o‘zgarishni alohida baholang: muhit kuchni ε marta kamaytiradi.','Masofani 2 marta kamaytirish kuchni 4 marta oshiradi.'],
+  [{p:'Boshlang‘ich va oxirgi kuchlar nisbatini yozamiz:',f:'\\frac{F_2}{F_1} = \\frac{1}{ε}·\\frac{r_1^2}{r_2^2}'},
+   {p:'Shartga ko‘ra r₂ = r₁/2, demak nisbat 4 ga teng:',f:'\\frac{F_2}{F_1} = \\frac{1}{2}·4'},
+   {p:'Javob:',f:'F_2 = 2F_1 \\;\\;—\\;\\; 2\\text{ marta ortadi}'}]),
+
+/* ===== 2. Potensial va energiya ===== */
+exc(2,'bilish','Potensial','tushuncha','1 volt potensiallar farqi nimani bildiradi?',
+  ['1 C zaryadni ko‘chirishda 1 J ish bajarilishini','1 A tok 1 s davomida oqishini','1 m masofada 1 N kuch ta’sir qilishini','1 F sig‘imda 1 C zaryad borligini'],0,
+  'U = A/q, demak 1 V = 1 J/C. Potensiallar farqi — bir kulon zaryadni ko‘chirishda maydon bajaradigan ish.'),
+exn(2,'bilish','Maydon ishi','hisoblash','q = 4·10⁻⁶ C zaryadni potensiallar farqi 150 V bo‘lgan nuqtalar orasida ko‘chirishda bajarilgan ishni toping.',
   [{s:'q',v:'4·10⁻⁶ C'},{s:'U',v:'150 V'}],6e-4,'J',0.02,
   ['Maydon ishi A = q·U.','4·10⁻⁶ · 150 = 6·10⁻⁴.'],
   [{p:'Elektrostatik maydon ishi:',f:'A = q·U'},
-   {p:'Qiymatlarni qo‘yamiz:',f:'A = 4·10⁻⁶ · 150'},
-   {p:'Javob:',f:'A = 6·10⁻⁴ J = 0,6 mJ'}]),
-ex(2,2,'E va U bog‘lanishi','hisoblash','Yassi kondensator plastinkalari orasidagi masofa 3 mm, kuchlanish 60 V. Oraliqdagi maydon kuchlanganligini toping.',
+   {p:'Qiymatlarni qo‘yamiz:',f:'A = 4·10^{-6} · 150'},
+   {p:'Javob:',f:'A = 6·10^{-4}\\text{ J} = 0,6\\text{ mJ}'}]),
+exn(2,'qollash','E va U bog‘lanishi','hisoblash','Yassi kondensator plastinkalari orasidagi masofa 3 mm, kuchlanish 60 V. Oraliqdagi maydon kuchlanganligini toping.',
   [{s:'U',v:'60 V'},{s:'d',v:'3 mm'}],20000,'V/m',0.02,
-  ['Bir jinsli maydon uchun E = U/d.','3 mm = 3·10⁻³ m — millimetrni metrga aylantirishni unutmang.'],
-  [{p:'Bir jinsli maydonda:',f:'E = U / d'},
-   {p:'Birlikni SI ga keltiramiz:',f:'d = 3 mm = 3·10⁻³ m'},
-   {p:'Hisoblaymiz:',f:'E = 60 / 3·10⁻³ = 2·10⁴'},
-   {p:'Javob:',f:'E = 20 000 V/m = 20 kV/m'}]),
-ex(2,3,'Tezlatish','hisoblash','Tinch holatdagi elektron 200 V potensiallar farqida tezlashtirildi. Uning oxirgi tezligini toping. (e = 1,6·10⁻¹⁹ C, m = 9,1·10⁻³¹ kg)',
+  ['Bir jinsli maydon uchun E = U/d.','3 mm = 3·10⁻³ m — millimetrni metrga aylantiring.'],
+  [{p:'Bir jinsli maydonda:',f:'E = \\frac{U}{d}'},
+   {p:'Birlikni SI ga keltiramiz:',f:'d = 3\\text{ mm} = 3·10^{-3}\\text{ m}'},
+   {p:'Hisoblaymiz:',f:'E = \\frac{60}{3·10^{-3}} = 2·10^{4}'},
+   {p:'Javob:',f:'E = 20000\\text{ V/m} = 20\\text{ kV/m}'}]),
+exn(2,'qollash','Tezlatish','hisoblash','Tinch holatdagi elektron 200 V potensiallar farqida tezlashtirildi. Uning oxirgi tezligini toping.',
   [{s:'U',v:'200 V'},{s:'e',v:'1,6·10⁻¹⁹ C'},{s:'m',v:'9,1·10⁻³¹ kg'}],8.4e6,'m/s',0.03,
-  ['Energiyaning saqlanishi: maydon ishi kinetik energiyaga aylanadi, eU = mv²/2.','v = √(2eU/m). Ildiz ostida ≈ 7,0·10¹³ chiqadi.'],
-  [{p:'Maydon ishi kinetik energiyaga aylanadi:',f:'e·U = m·v² / 2'},
-   {p:'Tezlikni ajratamiz:',f:'v = √(2·e·U / m)'},
-   {p:'Qiymatlarni qo‘yamiz:',f:'v = √(2·1,6·10⁻¹⁹·200 / 9,1·10⁻³¹) = √(7,03·10¹³)'},
-   {p:'Javob:',f:'v ≈ 8,4·10⁶ m/s'}]),
-/* 3 */
-ex(3,1,'Sig‘im','hisoblash','Kondensatorga 6·10⁻⁵ C zaryad berilganda uning kuchlanishi 30 V bo‘ldi. Sig‘imini mikrofaradda toping.',
+  ['Maydon ishi kinetik energiyaga aylanadi: eU = mv²/2.','v = √(2eU/m); ildiz ostida ≈ 7,0·10¹³ chiqadi.'],
+  [{p:'Energiyaning saqlanish qonuni:',f:'e·U = \\frac{m·v^2}{2}'},
+   {p:'Tezlikni ajratamiz:',f:'v = \\sqrt{\\frac{2·e·U}{m}}'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'v = \\sqrt{\\frac{2 · 1,6·10^{-19} · 200}{9,1·10^{-31}}} = \\sqrt{7,03·10^{13}}'},
+   {p:'Javob:',f:'v ≈ 8,4·10^{6}\\text{ m/s}'}]),
+exn(2,'mulohaza','Zarracha energiyasi','hisoblash','Elektron 300 V kuchlanishda tezlashtirildi. U olgan energiyani joulda toping.',
+  [{s:'U',v:'300 V'},{s:'e',v:'1,6·10⁻¹⁹ C'}],4.8e-17,'J',0.02,
+  ['Energiya W = qU formula bilan topiladi — bu bir vaqtning o‘zida 300 eV ga teng.','1,6·10⁻¹⁹ · 300 = ?'],
+  [{p:'Maydon zaryadga bajargan ishi uning energiyasiga aylanadi:',f:'W = e·U'},
+   {p:'Hisoblaymiz:',f:'W = 1,6·10^{-19} · 300 = 4,8·10^{-17}'},
+   {p:'Javob:',f:'W = 4,8·10^{-17}\\text{ J} = 300\\text{ eV}'}]),
+exn(2,'mulohaza','Ish va kuchlanganlik','hisoblash','Bir jinsli maydon kuchlanganligi 500 V/m. Maydon chiziqlari bo‘ylab 2 sm masofada q = 3·10⁻⁸ C zaryadni ko‘chirishda bajarilgan ishni toping.',
+  [{s:'E',v:'500 V/m'},{s:'d',v:'2 sm'},{s:'q',v:'3·10⁻⁸ C'}],3e-7,'J',0.03,
+  ['Avval U = E·d ni toping.','U = 10 V, so‘ng A = qU.'],
+  [{p:'Bir jinsli maydonda kuchlanish:',f:'U = E·d = 500 · 0,02 = 10\\text{ V}'},
+   {p:'Maydon ishi:',f:'A = q·U = 3·10^{-8} · 10'},
+   {p:'Javob:',f:'A = 3·10^{-7}\\text{ J}'}]),
+
+/* ===== 3. Elektr sig'imi ===== */
+exc(3,'bilish','Sig‘im','tushuncha','1 farad sig‘im nimani bildiradi?',
+  ['1 V kuchlanishda 1 C zaryad to‘planishini','1 C zaryadda 1 J energiya borligini','1 m² yuzaga 1 C zaryad to‘g‘ri kelishini','1 s da 1 C zaryad o‘tishini'],0,
+  'C = q/U, demak 1 F = 1 C/V. Farad juda katta birlik — amalda pF, nF va μF ishlatiladi.'),
+exn(3,'bilish','Sig‘im','hisoblash','Kondensatorga 6·10⁻⁵ C zaryad berilganda uning kuchlanishi 30 V bo‘ldi. Sig‘imini mikrofaradda toping.',
   [{s:'q',v:'6·10⁻⁵ C'},{s:'U',v:'30 V'}],2,'μF',0.02,
-  ['Sig‘im ta’rifi: C = q/U.','Natijani μF ga aylantirish uchun 10⁶ ga ko‘paytiring.'],
-  [{p:'Sig‘im ta’rifi:',f:'C = q / U'},
-   {p:'Hisoblaymiz:',f:'C = 6·10⁻⁵ / 30 = 2·10⁻⁶ F'},
-   {p:'Javob:',f:'C = 2 μF'}]),
-ex(3,2,'Kondensator energiyasi','hisoblash','C = 5 μF kondensator 100 V gacha zaryadlangan. Unda to‘plangan energiyani toping.',
+  ['Sig‘im ta’rifi: C = q/U.','Faradni μF ga aylantirish uchun 10⁶ ga ko‘paytiring.'],
+  [{p:'Sig‘im ta’rifi:',f:'C = \\frac{q}{U}'},
+   {p:'Hisoblaymiz:',f:'C = \\frac{6·10^{-5}}{30} = 2·10^{-6}\\text{ F}'},
+   {p:'Javob:',f:'C = 2\\text{ μF}'}]),
+exn(3,'qollash','Kondensator energiyasi','hisoblash','C = 5 μF kondensator 100 V gacha zaryadlangan. Unda to‘plangan energiyani toping.',
   [{s:'C',v:'5 μF'},{s:'U',v:'100 V'}],0.025,'J',0.02,
   ['W = CU²/2 formulasidan foydalaning.','5 μF = 5·10⁻⁶ F, U² = 10⁴ V².'],
-  [{p:'Kondensator energiyasi:',f:'W = C·U² / 2'},
-   {p:'Birliklarni keltiramiz:',f:'C = 5·10⁻⁶ F,&nbsp; U² = 10⁴ V²'},
-   {p:'Hisoblaymiz:',f:'W = 5·10⁻⁶ · 10⁴ / 2 = 0,05 / 2'},
-   {p:'Javob:',f:'W = 0,025 J = 25 mJ'}]),
-ex(3,3,'Yassi kondensator','hisoblash','Plastinkalar yuzasi 200 sm², oraliq masofasi 1 mm, dielektrik singdiruvchanligi ε = 2. Kondensator sig‘imini pikofaradda toping. (ε₀ = 8,85·10⁻¹² F/m)',
-  [{s:'S',v:'200 sm²'},{s:'d',v:'1 mm'},{s:'ε',v:'2'}],354,'pF',0.03,
-  ['C = ε·ε₀·S/d.','200 sm² = 0,02 m², 1 mm = 10⁻³ m. 1 pF = 10⁻¹² F.'],
-  [{p:'Yassi kondensator sig‘imi:',f:'C = ε·ε₀·S / d'},
-   {p:'Birliklarni SI ga keltiramiz:',f:'S = 200 sm² = 0,02 m²,&nbsp; d = 10⁻³ m'},
-   {p:'Hisoblaymiz:',f:'C = 2 · 8,85·10⁻¹² · 0,02 / 10⁻³ = 3,54·10⁻¹⁰ F'},
-   {p:'Javob:',f:'C = 354 pF'}]),
-/* 4 */
-ex(4,1,'Om qonuni','hisoblash','Qarshiligi 8 Ω bo‘lgan o‘tkazgichga 24 V kuchlanish berildi. Tok kuchini toping.',
+  [{p:'Kondensator maydoni energiyasi:',f:'W = \\frac{C·U^2}{2}'},
+   {p:'Birliklarni keltiramiz:',f:'C = 5·10^{-6}\\text{ F}\\;\\; U^2 = 10^{4}'},
+   {p:'Hisoblaymiz:',f:'W = \\frac{5·10^{-6} · 10^{4}}{2} = \\frac{0,05}{2}'},
+   {p:'Javob:',f:'W = 0,025\\text{ J} = 25\\text{ mJ}'}]),
+exn(3,'qollash','Yassi kondensator','hisoblash','Plastinkalar yuzasi 200 sm², oraliq masofasi 1 mm, dielektrik singdiruvchanligi ε = 2. Kondensator sig‘imini pikofaradda toping.',
+  [{s:'S',v:'200 sm²'},{s:'d',v:'1 mm'},{s:'ε',v:'2'},{s:'ε₀',v:'8,85·10⁻¹² F/m'}],354,'pF',0.03,
+  ['C = ε·ε₀·S/d.','200 sm² = 0,02 m², 1 mm = 10⁻³ m, 1 pF = 10⁻¹² F.'],
+  [{p:'Yassi kondensator sig‘imi:',f:'C = \\frac{ε·ε_0·S}{d}'},
+   {p:'Birliklarni SI ga keltiramiz:',f:'S = 0,02\\text{ m}^2 \\;\\; d = 10^{-3}\\text{ m}'},
+   {p:'Hisoblaymiz:',f:'C = \\frac{2 · 8,85·10^{-12} · 0,02}{10^{-3}} = 3,54·10^{-10}'},
+   {p:'Javob:',f:'C = 354\\text{ pF}'}]),
+exn(3,'mulohaza','Ketma-ket ulash','hisoblash','C₁ = 2 μF va C₂ = 3 μF kondensatorlar ketma-ket ulanib, 100 V manbaga ulandi. Har bir kondensatordagi zaryadni mikrokulonda toping.',
+  [{s:'C₁',v:'2 μF'},{s:'C₂',v:'3 μF'},{s:'U',v:'100 V'}],120,'μC',0.03,
+  ['Ketma-ket ulashda zaryad ikkala kondensatorda bir xil.','Avval umumiy sig‘imni toping: 1/C = 1/2 + 1/3.'],
+  [{p:'Umumiy sig‘im:',f:'\\frac{1}{C} = \\frac{1}{2} + \\frac{1}{3} = \\frac{5}{6} \\;\\;⇒\\;\\; C = 1,2\\text{ μF}'},
+   {p:'Ketma-ket ulashda zaryad bir xil:',f:'q = C·U = 1,2·10^{-6} · 100'},
+   {p:'Javob:',f:'q = 1,2·10^{-4}\\text{ C} = 120\\text{ μC}'}]),
+exn(3,'mulohaza','Energiya va masofa','formula','Zaryadlangan kondensator manbadan uzildi, so‘ng plastinkalar orasidagi masofa 2 marta oshirildi. Maydon energiyasi necha marta ortadi?',
+  [{s:'q',v:'o‘zgarmaydi'},{s:'d₂',v:'2d₁'}],2,'marta',0.02,
+  ['Manbadan uzilgani uchun zaryad o‘zgarmaydi — demak W = q²/(2C) formulasini ishlating.','d 2 marta ortsa C 2 marta kamayadi.'],
+  [{p:'Zaryad o‘zgarmagani uchun:',f:'W = \\frac{q^2}{2C}'},
+   {p:'Sig‘im masofaga teskari proporsional:',f:'C = \\frac{ε_0 S}{d} \\;\\;⇒\\;\\; C_2 = \\frac{C_1}{2}'},
+   {p:'Demak energiya:',f:'\\frac{W_2}{W_1} = \\frac{C_1}{C_2} = 2'},
+   {p:'Javob:',f:'2\\text{ marta ortadi (plastinkalarni ajratishda bajarilgan ish hisobidan)}'}]),
+
+/* ===== 4. O'zgarmas elektr toki ===== */
+exc(4,'bilish','Qarshilik','tushuncha','O‘tkazgich qarshiligi nimalarga bog‘liq?',
+  ['Material, uzunlik va kesim yuzasiga','Faqat unga berilgan kuchlanishga','Faqat undan oqayotgan tokka','Zanjirdagi manba EYuK iga'],0,
+  'R = ρl/S — qarshilik o‘tkazgichning o‘z xossasi. Kuchlanish yoki tokni o‘zgartirish qarshilikni o‘zgartirmaydi (harorat o‘zgarmasa).'),
+exn(4,'bilish','Om qonuni','hisoblash','Qarshiligi 8 Ω bo‘lgan o‘tkazgichga 24 V kuchlanish berildi. Tok kuchini toping.',
   [{s:'U',v:'24 V'},{s:'R',v:'8 Ω'}],3,'A',0.02,
   ['Zanjir qismi uchun Om qonuni: I = U/R.','24 ni 8 ga bo‘ling.'],
-  [{p:'Om qonuni:',f:'I = U / R'},
-   {p:'Hisoblaymiz:',f:'I = 24 / 8'},
-   {p:'Javob:',f:'I = 3 A'}]),
-ex(4,2,'Solishtirma qarshilik','hisoblash','Uzunligi 2 m, kesimi 0,2 mm² bo‘lgan nixrom simning qarshiligini toping. (ρ = 1,1·10⁻⁶ Ω·m)',
+  [{p:'Om qonuni:',f:'I = \\frac{U}{R}'},
+   {p:'Hisoblaymiz:',f:'I = \\frac{24}{8}'},
+   {p:'Javob:',f:'I = 3\\text{ A}'}]),
+exn(4,'qollash','Solishtirma qarshilik','hisoblash','Uzunligi 2 m, kesimi 0,2 mm² bo‘lgan nixrom simning qarshiligini toping.',
   [{s:'l',v:'2 m'},{s:'S',v:'0,2 mm²'},{s:'ρ',v:'1,1·10⁻⁶ Ω·m'}],11,'Ω',0.02,
-  ['R = ρ·l/S.','0,2 mm² = 0,2·10⁻⁶ m² = 2·10⁻⁷ m².'],
-  [{p:'Qarshilik formulasi:',f:'R = ρ·l / S'},
-   {p:'Kesimni SI ga keltiramiz:',f:'S = 0,2 mm² = 2·10⁻⁷ m²'},
-   {p:'Hisoblaymiz:',f:'R = 1,1·10⁻⁶ · 2 / 2·10⁻⁷ = 2,2·10⁻⁶ / 2·10⁻⁷'},
-   {p:'Javob:',f:'R = 11 Ω'}]),
-ex(4,3,'Aralash ulash','hisoblash','6 Ω va 3 Ω qarshiliklar parallel ulangan, ularga 4 Ω qarshilik ketma-ket qo‘shilgan. Zanjirga 18 V kuchlanish berilgan. Umumiy tok kuchini toping.',
+  ['R = ρ·l/S.','0,2 mm² = 2·10⁻⁷ m² — 1 mm² = 10⁻⁶ m².'],
+  [{p:'Qarshilik formulasi:',f:'R = \\frac{ρ·l}{S}'},
+   {p:'Kesimni SI ga keltiramiz:',f:'S = 0,2\\text{ mm}^2 = 2·10^{-7}\\text{ m}^2'},
+   {p:'Hisoblaymiz:',f:'R = \\frac{1,1·10^{-6} · 2}{2·10^{-7}}'},
+   {p:'Javob:',f:'R = 11\\text{ Ω}'}]),
+exn(4,'qollash','Aralash ulash','hisoblash','6 Ω va 3 Ω qarshiliklar parallel ulangan, ularga 4 Ω qarshilik ketma-ket qo‘shilgan. Zanjirga 18 V kuchlanish berilgan. Umumiy tok kuchini toping.',
   [{s:'R₁',v:'6 Ω'},{s:'R₂',v:'3 Ω'},{s:'R₃',v:'4 Ω'},{s:'U',v:'18 V'}],3,'A',0.02,
-  ['Avval parallel qismni soddalashtiring, keyin ketma-ket qo‘shing.','Parallel qism 2 Ω chiqadi, umumiy qarshilik 6 Ω.'],
-  [{p:'Parallel qism:',f:'1/R₁₂ = 1/6 + 1/3 = 1/2 ⇒ R₁₂ = 2 Ω'},
-   {p:'Ketma-ket qo‘shamiz:',f:'R = R₁₂ + R₃ = 2 + 4 = 6 Ω'},
-   {p:'Om qonuni:',f:'I = U / R = 18 / 6'},
-   {p:'Javob:',f:'I = 3 A'}]),
-/* 5 */
-ex(5,1,'To‘liq zanjir','hisoblash','EYuK si 9 V, ichki qarshiligi 1 Ω bo‘lgan manbaga 17 Ω qarshilik ulandi. Zanjirdagi tok kuchini toping.',
+  ['Avval parallel qismni soddalashtiring, keyin ketma-ket qo‘shing.','Parallel qism 2 Ω, umumiy qarshilik 6 Ω.'],
+  [{p:'Parallel qism:',f:'\\frac{1}{R_{12}} = \\frac{1}{6} + \\frac{1}{3} = \\frac{1}{2} \\;\\;⇒\\;\\; R_{12} = 2\\text{ Ω}'},
+   {p:'Ketma-ket qo‘shamiz:',f:'R = R_{12} + R_3 = 2 + 4 = 6\\text{ Ω}'},
+   {p:'Om qonuni:',f:'I = \\frac{U}{R} = \\frac{18}{6}'},
+   {p:'Javob:',f:'I = 3\\text{ A}'}]),
+exn(4,'mulohaza','Quvvat taqsimoti','hisoblash','4 Ω va 6 Ω qarshiliklar ketma-ket ulanib, 20 V kuchlanishga ulandi. 6 Ω qarshilikda ajralgan quvvatni toping.',
+  [{s:'R₁',v:'4 Ω'},{s:'R₂',v:'6 Ω'},{s:'U',v:'20 V'}],24,'W',0.02,
+  ['Ketma-ket ulashda avval umumiy tokni toping.','I = 2 A, so‘ng P = I²R ni 6 Ω uchun hisoblang.'],
+  [{p:'Umumiy qarshilik va tok:',f:'R = 4 + 6 = 10\\text{ Ω}\\;\\; I = \\frac{20}{10} = 2\\text{ A}'},
+   {p:'Ketma-ket ulashda tok bir xil, quvvat:',f:'P = I^2·R_2 = 4 · 6'},
+   {p:'Javob:',f:'P = 24\\text{ W}'}]),
+exn(4,'mulohaza','Qarshilikning o‘zgarishi','formula','Simni cho‘zib uzunligi 2 marta oshirildi (hajmi o‘zgarmadi). Qarshiligi necha marta ortadi?',
+  [{s:'l₂',v:'2l₁'},{s:'V',v:'o‘zgarmas'}],4,'marta',0.02,
+  ['Hajm o‘zgarmasa V = S·l = const, demak uzunlik 2 marta ortsa kesim 2 marta kamayadi.','R = ρl/S da ikkala o‘zgarish bir yo‘nalishda ta’sir qiladi.'],
+  [{p:'Hajmning saqlanishi:',f:'S_1·l_1 = S_2·l_2 \\;\\;⇒\\;\\; S_2 = \\frac{S_1}{2}'},
+   {p:'Qarshiliklar nisbati:',f:'\\frac{R_2}{R_1} = \\frac{l_2}{l_1}·\\frac{S_1}{S_2} = 2 · 2'},
+   {p:'Javob:',f:'4\\text{ marta ortadi}'}]),
+
+/* ===== 5. To'liq zanjir ===== */
+exc(5,'bilish','EYuK','tushuncha','Elektr yurituvchi kuch (EYuK) nima?',
+  ['Nomelektr kuchlarning ishining ko‘chirilgan zaryadga nisbati','Manba qisqichlaridagi kuchlanish','Zanjirdagi tok kuchi','Manbaning ichki qarshiligi'],0,
+  'ε = A_nomel/q. Qisqich kuchlanishi esa U = ε − I·r, ya’ni EYuK dan kichik va tokka bog‘liq.'),
+exn(5,'bilish','To‘liq zanjir','hisoblash','EYuK si 9 V, ichki qarshiligi 1 Ω bo‘lgan manbaga 17 Ω qarshilik ulandi. Zanjirdagi tok kuchini toping.',
   [{s:'ε',v:'9 V'},{s:'r',v:'1 Ω'},{s:'R',v:'17 Ω'}],0.5,'A',0.02,
   ['To‘liq zanjir uchun Om qonuni: I = ε/(R+r).','Maxrajda 18 Ω bo‘ladi.'],
-  [{p:'To‘liq zanjir uchun Om qonuni:',f:'I = ε / (R + r)'},
-   {p:'Qiymatlarni qo‘yamiz:',f:'I = 9 / (17 + 1) = 9 / 18'},
-   {p:'Javob:',f:'I = 0,5 A'}]),
-ex(5,2,'Joul–Lens','hisoblash','Qarshiligi 10 Ω bo‘lgan isitgichdan 2 A tok 5 minut o‘tdi. Ajralgan issiqlik miqdorini joulda toping.',
+  [{p:'To‘liq zanjir uchun Om qonuni:',f:'I = \\frac{ε}{R + r}'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'I = \\frac{9}{17 + 1} = \\frac{9}{18}'},
+   {p:'Javob:',f:'I = 0,5\\text{ A}'}]),
+exn(5,'qollash','Joul–Lens','hisoblash','Qarshiligi 10 Ω bo‘lgan isitgichdan 2 A tok 5 minut o‘tdi. Ajralgan issiqlik miqdorini joulda toping.',
   [{s:'I',v:'2 A'},{s:'R',v:'10 Ω'},{s:'t',v:'5 min'}],12000,'J',0.02,
   ['Joul–Lens qonuni: Q = I²Rt.','Vaqtni sekundga aylantiring: 5 min = 300 s.'],
-  [{p:'Joul–Lens qonuni:',f:'Q = I² · R · t'},
-   {p:'Vaqtni SI ga keltiramiz:',f:'t = 5 min = 300 s'},
+  [{p:'Joul–Lens qonuni:',f:'Q = I^2·R·t'},
+   {p:'Vaqtni SI ga keltiramiz:',f:'t = 5\\text{ min} = 300\\text{ s}'},
    {p:'Hisoblaymiz:',f:'Q = 4 · 10 · 300'},
-   {p:'Javob:',f:'Q = 12 000 J = 12 kJ'}]),
-ex(5,3,'Ichki qarshilik','hisoblash','EYuK si 6 V, ichki qarshiligi 0,5 Ω manbaning qisqichlaridagi kuchlanish 5,5 V ga teng. Tashqi qarshilikni toping.',
+   {p:'Javob:',f:'Q = 12000\\text{ J} = 12\\text{ kJ}'}]),
+exn(5,'qollash','Ichki qarshilik','hisoblash','EYuK si 6 V, ichki qarshiligi 0,5 Ω manbaning qisqichlaridagi kuchlanish 5,5 V ga teng. Tashqi qarshilikni toping.',
   [{s:'ε',v:'6 V'},{s:'r',v:'0,5 Ω'},{s:'U',v:'5,5 V'}],5.5,'Ω',0.02,
-  ['U = ε − I·r tenglamasidan avval tokni toping.','I = (ε − U)/r = 1 A, so‘ng R = U/I.'],
-  [{p:'Qisqich kuchlanishi formulasidan tokni topamiz:',f:'U = ε − I·r ⇒ I = (ε − U)/r'},
-   {p:'Hisoblaymiz:',f:'I = (6 − 5,5) / 0,5 = 1 A'},
-   {p:'Tashqi qarshilik uchun Om qonuni:',f:'R = U / I = 5,5 / 1'},
-   {p:'Javob:',f:'R = 5,5 Ω'}]),
-/* 6 */
-ex(6,1,'Faradey qonuni','hisoblash','Elektroliz vannasidan 5 A tok 10 minut o‘tdi. Katodda ajralgan mis massasini grammda toping. (k = 3,3·10⁻⁷ kg/C)',
+  ['U = ε − I·r tenglamasidan avval tokni toping.','I = (6 − 5,5)/0,5 = 1 A, so‘ng R = U/I.'],
+  [{p:'Qisqich kuchlanishidan tokni topamiz:',f:'U = ε − I·r \\;\\;⇒\\;\\; I = \\frac{ε − U}{r}'},
+   {p:'Hisoblaymiz:',f:'I = \\frac{6 − 5,5}{0,5} = 1\\text{ A}'},
+   {p:'Tashqi qarshilik:',f:'R = \\frac{U}{I} = \\frac{5,5}{1}'},
+   {p:'Javob:',f:'R = 5,5\\text{ Ω}'}]),
+exn(5,'mulohaza','Qisqa tutashuv','hisoblash','EYuK si 12 V, ichki qarshiligi 1 Ω bo‘lgan manba qisqa tutashtirildi. Qisqa tutashuv tokini toping.',
+  [{s:'ε',v:'12 V'},{s:'r',v:'1 Ω'},{s:'R',v:'0'}],12,'A',0.02,
+  ['Qisqa tutashuvda tashqi qarshilik nolga teng: R = 0.','I = ε/r.'],
+  [{p:'To‘liq zanjir uchun Om qonunida R = 0:',f:'I = \\frac{ε}{0 + r} = \\frac{ε}{r}'},
+   {p:'Hisoblaymiz:',f:'I = \\frac{12}{1}'},
+   {p:'Javob:',f:'I = 12\\text{ A} \\;\\;—\\;\\; \\text{manba uchun xavfli rejim}'}]),
+exn(5,'mulohaza','Maksimal quvvat','hisoblash','EYuK si 4,5 V, ichki qarshiligi 0,5 Ω manbadan olinadigan maksimal foydali quvvatni toping.',
+  [{s:'ε',v:'4,5 V'},{s:'r',v:'0,5 Ω'}],10.125,'W',0.03,
+  ['Maksimal foydali quvvat R = r shartida olinadi.','Bu holda I = ε/(2r), P = I²R.'],
+  [{p:'Maksimum sharti:',f:'R = r = 0,5\\text{ Ω}'},
+   {p:'Zanjirdagi tok:',f:'I = \\frac{ε}{2r} = \\frac{4,5}{1} = 4,5\\text{ A}'},
+   {p:'Foydali quvvat:',f:'P = I^2·R = 20,25 · 0,5'},
+   {p:'Javob:',f:'P = 10,125\\text{ W}\\;\\; (η = 50\\%)'}]),
+
+/* ===== 6. Turli muhitlarda tok ===== */
+exc(6,'bilish','Tok tashuvchilar','tushuncha','Metall va elektrolitdagi tok o‘tishining asosiy farqi nimada?',
+  ['Metallda elektronlar, elektrolitda ionlar ko‘chadi — shuning uchun elektrolizda modda ham ko‘chadi','Metallda tok yo‘q, faqat elektrolitda bor','Elektrolitda faqat elektronlar ko‘chadi','Ikkalasida ham faqat kovaklar ko‘chadi'],0,
+  'Metallda modda ko‘chmaydi, faqat erkin elektronlar siljiydi. Elektrolitda ionlar ko‘chadi va elektrodlarda modda ajraladi — elektroliz.'),
+exn(6,'bilish','Faradey qonuni','hisoblash','Elektroliz vannasidan 5 A tok 10 minut o‘tdi. Katodda ajralgan mis massasini grammda toping.',
   [{s:'I',v:'5 A'},{s:'t',v:'10 min'},{s:'k',v:'3,3·10⁻⁷ kg/C'}],0.99,'g',0.03,
-  ['Faradeyning birinchi qonuni: m = k·I·t.','t = 600 s; natijani grammga aylantirish uchun 1000 ga ko‘paytiring.'],
+  ['Faradeyning birinchi qonuni: m = k·I·t.','t = 600 s; kg ni g ga aylantiring.'],
   [{p:'Faradeyning birinchi qonuni:',f:'m = k·I·t'},
-   {p:'Vaqtni SI ga keltiramiz:',f:'t = 10 min = 600 s'},
-   {p:'Hisoblaymiz:',f:'m = 3,3·10⁻⁷ · 5 · 600 = 9,9·10⁻⁴ kg'},
-   {p:'Javob:',f:'m = 0,99 g'}]),
-ex(6,2,'Faradey qonuni','hisoblash','Nikellash vannasidan 1,5 A tok 20 minut o‘tdi. Ajralgan nikel massasini grammda toping. (M = 0,0587 kg/mol, n = 2, F = 96500 C/mol)',
-  [{s:'I',v:'1,5 A'},{s:'t',v:'20 min'},{s:'M',v:'0,0587 kg/mol'},{s:'n',v:'2'}],0.55,'g',0.05,
+   {p:'Vaqtni SI ga keltiramiz:',f:'t = 10\\text{ min} = 600\\text{ s}'},
+   {p:'Hisoblaymiz:',f:'m = 3,3·10^{-7} · 5 · 600 = 9,9·10^{-4}\\text{ kg}'},
+   {p:'Javob:',f:'m = 0,99\\text{ g}'}]),
+exn(6,'qollash','Faradeyning II qonuni','hisoblash','Nikellash vannasidan 1,5 A tok 20 minut o‘tdi. Ajralgan nikel massasini grammda toping.',
+  [{s:'I',v:'1,5 A'},{s:'t',v:'20 min'},{s:'M',v:'0,0587 kg/mol'},{s:'n',v:'2'},{s:'F',v:'96500 C/mol'}],0.55,'g',0.05,
   ['Avval elektrokimyoviy ekvivalentni toping: k = M/(F·n).','q = I·t = 1800 C, so‘ng m = k·q.'],
-  [{p:'Faradeyning ikkinchi qonuni:',f:'k = M / (F·n) = 0,0587 / (96500·2) ≈ 3,04·10⁻⁷ kg/C'},
-   {p:'O‘tgan zaryad:',f:'q = I·t = 1,5 · 1200 = 1800 C'},
-   {p:'Massani topamiz:',f:'m = k·q = 3,04·10⁻⁷ · 1800 ≈ 5,5·10⁻⁴ kg'},
-   {p:'Javob:',f:'m ≈ 0,55 g'}]),
-ex(6,3,'Diod zanjiri','hisoblash','5 V manbaga diod va 100 Ω qarshilik ketma-ket ulangan. To‘g‘ri ulashda diodda 0,7 V kuchlanish tushadi. Zanjirdagi tokni milliamperda toping.',
+  [{p:'Faradeyning ikkinchi qonuni:',f:'k = \\frac{M}{F·n} = \\frac{0,0587}{96500 · 2} ≈ 3,04·10^{-7}'},
+   {p:'O‘tgan zaryad:',f:'q = I·t = 1,5 · 1200 = 1800\\text{ C}'},
+   {p:'Massa:',f:'m = k·q = 3,04·10^{-7} · 1800'},
+   {p:'Javob:',f:'m ≈ 0,55\\text{ g}'}]),
+exn(6,'qollash','Diod zanjiri','hisoblash','5 V manbaga diod va 100 Ω qarshilik ketma-ket ulangan. To‘g‘ri ulashda diodda 0,7 V kuchlanish tushadi. Zanjirdagi tokni milliamperda toping.',
   [{s:'ε',v:'5 V'},{s:'U_d',v:'0,7 V'},{s:'R',v:'100 Ω'}],43,'mA',0.03,
-  ['Qarshilikdagi kuchlanish manba kuchlanishidan diod kuchlanishini ayirishga teng.','I = (5 − 0,7)/100 = 0,043 A.'],
-  [{p:'Ketma-ket zanjirda kuchlanishlar qo‘shiladi:',f:'ε = U_d + U_R ⇒ U_R = 5 − 0,7 = 4,3 V'},
-   {p:'Qarshilik uchun Om qonuni:',f:'I = U_R / R = 4,3 / 100 = 0,043 A'},
-   {p:'Javob:',f:'I = 43 mA'}]),
-/* 7 */
-ex(7,1,'Amper kuchi','hisoblash','Induksiyasi 0,2 T magnit maydonga perpendikulyar joylashgan 0,4 m uzunlikdagi o‘tkazgichdan 5 A tok oqadi. Amper kuchini toping.',
+  ['Ketma-ket zanjirda kuchlanishlar qo‘shiladi.','Qarshilikdagi kuchlanish 5 − 0,7 = 4,3 V.'],
+  [{p:'Kuchlanishlar balansi:',f:'ε = U_d + U_R \\;\\;⇒\\;\\; U_R = 5 − 0,7 = 4,3\\text{ V}'},
+   {p:'Qarshilik uchun Om qonuni:',f:'I = \\frac{U_R}{R} = \\frac{4,3}{100} = 0,043\\text{ A}'},
+   {p:'Javob:',f:'I = 43\\text{ mA}'}]),
+exn(6,'mulohaza','Elektroliz — teskari masala','hisoblash','Elektroliz 30 minut davom etdi va 1,8 g kumush ajraldi. Tok kuchini toping. (k = 1,12·10⁻⁶ kg/C)',
+  [{s:'m',v:'1,8 g'},{s:'t',v:'30 min'},{s:'k',v:'1,12·10⁻⁶ kg/C'}],0.89,'A',0.04,
+  ['m = k·I·t formulasidan I ni ajratib oling.','m = 1,8·10⁻³ kg, t = 1800 s.'],
+  [{p:'Formuladan tokni ajratamiz:',f:'m = k·I·t \\;\\;⇒\\;\\; I = \\frac{m}{k·t}'},
+   {p:'Birliklarni keltiramiz:',f:'m = 1,8·10^{-3}\\text{ kg}\\;\\; t = 1800\\text{ s}'},
+   {p:'Hisoblaymiz:',f:'I = \\frac{1,8·10^{-3}}{1,12·10^{-6} · 1800} = \\frac{1,8·10^{-3}}{2,016·10^{-3}}'},
+   {p:'Javob:',f:'I ≈ 0,89\\text{ A}'}]),
+exc(6,'mulohaza','Harorat bog‘liqligi','tushuncha','Nega metall qizdirilganda qarshiligi ortadi, yarimo‘tkazgichniki esa kamayadi?',
+  ['Metallda tashuvchilar soni o‘zgarmaydi, lekin panjara tebranishi kuchayadi; yarimo‘tkazgichda esa erkin tashuvchilar soni keskin ortadi',
+   'Metallda elektronlar yo‘qoladi, yarimo‘tkazgichda paydo bo‘ladi',
+   'Metall kengayadi, yarimo‘tkazgich siqiladi',
+   'Yarimo‘tkazgichda ionlar harakatlanadi'],0,
+  'Metallda erkin elektronlar soni deyarli o‘zgarmaydi, lekin issiqlik tebranishlari ularning harakatiga ko‘proq to‘sqinlik qiladi. Yarimo‘tkazgichda esa harorat yangi elektron–kovak juftliklarini hosil qiladi va bu effekt ustun keladi.'),
+
+/* ===== 7. Magnit maydon, Amper kuchi ===== */
+exc(7,'bilish','Amper kuchi','tushuncha','Tokli o‘tkazgichga ta’sir etuvchi Amper kuchi qachon nolga teng bo‘ladi?',
+  ['O‘tkazgich magnit maydon chiziqlariga parallel joylashganda','O‘tkazgich maydonga perpendikulyar joylashganda','Tok kuchi maksimal bo‘lganda','Induksiya maksimal bo‘lganda'],0,
+  'F = BIl·sinα. α = 0° bo‘lganda sinα = 0 va kuch yo‘qoladi; α = 90° da esa kuch maksimal.'),
+exn(7,'bilish','Amper kuchi','hisoblash','Induksiyasi 0,2 T magnit maydonga perpendikulyar joylashgan 0,4 m uzunlikdagi o‘tkazgichdan 5 A tok oqadi. Amper kuchini toping.',
   [{s:'B',v:'0,2 T'},{s:'I',v:'5 A'},{s:'l',v:'0,4 m'},{s:'α',v:'90°'}],0.4,'N',0.02,
   ['F = B·I·l·sinα, perpendikulyar holatda sinα = 1.','0,2 · 5 · 0,4 = ?'],
   [{p:'Amper kuchi:',f:'F = B·I·l·sinα'},
    {p:'α = 90° ⇒ sinα = 1:',f:'F = 0,2 · 5 · 0,4'},
-   {p:'Javob:',f:'F = 0,4 N'}]),
-ex(7,2,'To‘g‘ri tok maydoni','hisoblash','To‘g‘ri uzun o‘tkazgichdan 20 A tok oqadi. Undan 10 sm masofadagi magnit induksiyani mikroteslada toping. (μ₀ = 4π·10⁻⁷ T·m/A)',
-  [{s:'I',v:'20 A'},{s:'r',v:'10 sm'}],40,'μT',0.03,
-  ['B = μ₀I/(2πr). π lar qisqaradi: B = 2·10⁻⁷·I/r.','1 μT = 10⁻⁶ T.'],
-  [{p:'To‘g‘ri tok maydoni:',f:'B = μ₀·I / (2π·r)'},
-   {p:'μ₀/(2π) = 2·10⁻⁷ ekanini ishlatamiz:',f:'B = 2·10⁻⁷ · 20 / 0,1'},
-   {p:'Hisoblaymiz:',f:'B = 4·10⁻⁶ T'},
-   {p:'Javob:',f:'B = 40 μT'}]),
-ex(7,3,'Amper kuchi','hisoblash','Induksiyasi 0,5 T maydonda 0,5 m uzunlikdagi o‘tkazgich maydon chiziqlariga 30° burchak ostida joylashgan. Undan 3 A tok oqsa, Amper kuchini toping.',
+   {p:'Javob:',f:'F = 0,4\\text{ N}'}]),
+exn(7,'qollash','To‘g‘ri tok maydoni','hisoblash','To‘g‘ri uzun o‘tkazgichdan 20 A tok oqadi. Undan 10 sm masofadagi magnit induksiyani mikroteslada toping.',
+  [{s:'I',v:'20 A'},{s:'r',v:'10 sm'},{s:'μ₀',v:'4π·10⁻⁷ T·m/A'}],40,'μT',0.03,
+  ['B = μ₀I/(2πr); π lar qisqaradi: B = 2·10⁻⁷·I/r.','1 μT = 10⁻⁶ T.'],
+  [{p:'To‘g‘ri tok maydoni:',f:'B = \\frac{μ_0·I}{2π·r}'},
+   {p:'Koeffitsiyentni soddalashtiramiz:',f:'\\frac{μ_0}{2π} = 2·10^{-7}'},
+   {p:'Hisoblaymiz:',f:'B = \\frac{2·10^{-7} · 20}{0,1} = 4·10^{-6}\\text{ T}'},
+   {p:'Javob:',f:'B = 40\\text{ μT}'}]),
+exn(7,'qollash','Amper kuchi','hisoblash','Induksiyasi 0,5 T maydonda 0,5 m uzunlikdagi o‘tkazgich maydon chiziqlariga 30° burchak ostida joylashgan. Undan 3 A tok oqsa, Amper kuchini toping.',
   [{s:'B',v:'0,5 T'},{s:'I',v:'3 A'},{s:'l',v:'0,5 m'},{s:'α',v:'30°'}],0.375,'N',0.03,
   ['Burchakni hisobga oling: sin30° = 0,5.','F = 0,5 · 3 · 0,5 · 0,5.'],
   [{p:'Amper kuchi:',f:'F = B·I·l·sinα'},
-   {p:'sin30° = 0,5:',f:'F = 0,5 · 3 · 0,5 · 0,5'},
-   {p:'Javob:',f:'F = 0,375 N'}]),
-/* 8 */
-ex(8,1,'Lorens kuchi','hisoblash','Tezligi 10⁶ m/s bo‘lgan elektron induksiyasi 0,2 T maydonga perpendikulyar harakatlanadi. Lorens kuchini toping. (q = 1,6·10⁻¹⁹ C)',
+   {p:'sin30° = 0,5 ni qo‘yamiz:',f:'F = 0,5 · 3 · 0,5 · 0,5'},
+   {p:'Javob:',f:'F = 0,375\\text{ N}'}]),
+exn(7,'mulohaza','Solenoid — teskari masala','hisoblash','Uzunligi 0,5 m, o‘ramlar soni 1000 bo‘lgan solenoid ichida induksiya 4 mT bo‘lishi uchun qanday tok kerak? (o‘zak yo‘q)',
+  [{s:'l',v:'0,5 m'},{s:'N',v:'1000'},{s:'B',v:'4 mT'}],1.59,'A',0.04,
+  ['B = μ₀·n·I formulasidan I ni ajrating, n = N/l.','n = 2000 m⁻¹, μ₀n = 2,51·10⁻³.'],
+  [{p:'Birlik uzunlikdagi o‘ramlar soni:',f:'n = \\frac{N}{l} = \\frac{1000}{0,5} = 2000'},
+   {p:'Formuladan tokni ajratamiz:',f:'B = μ_0·n·I \\;\\;⇒\\;\\; I = \\frac{B}{μ_0·n}'},
+   {p:'Hisoblaymiz:',f:'I = \\frac{4·10^{-3}}{4π·10^{-7} · 2000} = \\frac{4·10^{-3}}{2,51·10^{-3}}'},
+   {p:'Javob:',f:'I ≈ 1,59\\text{ A}'}]),
+exn(7,'mulohaza','Masofani topish','hisoblash','To‘g‘ri o‘tkazgichdan 15 A tok oqadi. Qanday masofada magnit induksiya 3·10⁻⁵ T ga teng bo‘ladi? Javobni santimetrda yozing.',
+  [{s:'I',v:'15 A'},{s:'B',v:'3·10⁻⁵ T'}],10,'sm',0.03,
+  ['B = 2·10⁻⁷·I/r formulasidan r ni ajrating.','r = 2·10⁻⁷·15/3·10⁻⁵.'],
+  [{p:'Formuladan masofani ajratamiz:',f:'B = \\frac{2·10^{-7}·I}{r} \\;\\;⇒\\;\\; r = \\frac{2·10^{-7}·I}{B}'},
+   {p:'Hisoblaymiz:',f:'r = \\frac{2·10^{-7} · 15}{3·10^{-5}} = \\frac{3·10^{-6}}{3·10^{-5}} = 0,1\\text{ m}'},
+   {p:'Javob:',f:'r = 10\\text{ sm}'}]),
+
+/* ===== 8. Lorens kuchi ===== */
+exc(8,'bilish','Lorens kuchi','tushuncha','Lorens kuchi zarracha tezligiga qanday ta’sir qiladi?',
+  ['Faqat yo‘nalishini o‘zgartiradi, modulini o‘zgartirmaydi','Tezlikni oshiradi','Tezlikni kamaytiradi','Umuman ta’sir qilmaydi'],0,
+  'Kuch har doim tezlikka perpendikulyar, shuning uchun ish bajarmaydi (A = 0) va kinetik energiya o‘zgarmaydi — faqat traektoriya egiladi.'),
+exn(8,'bilish','Lorens kuchi','hisoblash','Tezligi 10⁶ m/s bo‘lgan elektron induksiyasi 0,2 T maydonga perpendikulyar harakatlanadi. Lorens kuchini toping.',
   [{s:'q',v:'1,6·10⁻¹⁹ C'},{s:'v',v:'10⁶ m/s'},{s:'B',v:'0,2 T'}],3.2e-14,'N',0.03,
   ['F = q·v·B·sinα, sin90° = 1.','1,6·10⁻¹⁹ · 10⁶ · 0,2 = ?'],
   [{p:'Lorens kuchi:',f:'F = q·v·B·sinα'},
-   {p:'Perpendikulyar holat:',f:'F = 1,6·10⁻¹⁹ · 10⁶ · 0,2'},
-   {p:'Javob:',f:'F = 3,2·10⁻¹⁴ N'}]),
-ex(8,2,'Aylana radiusi','hisoblash','Proton 10⁶ m/s tezlik bilan 0,5 T maydonga perpendikulyar kirdi. Aylana radiusini santimetrda toping. (m = 1,67·10⁻²⁷ kg)',
-  [{s:'m',v:'1,67·10⁻²⁷ kg'},{s:'v',v:'10⁶ m/s'},{s:'B',v:'0,5 T'}],2.1,'sm',0.05,
-  ['Lorens kuchi markazga intilma kuch rolini bajaradi: r = mv/(qB).','Natijani santimetrga aylantirish uchun 100 ga ko‘paytiring.'],
-  [{p:'Lorens kuchi markazga intilma kuchga teng:',f:'q·v·B = m·v²/r ⇒ r = m·v / (q·B)'},
-   {p:'Qiymatlarni qo‘yamiz:',f:'r = 1,67·10⁻²⁷ · 10⁶ / (1,6·10⁻¹⁹ · 0,5)'},
-   {p:'Hisoblaymiz:',f:'r = 1,67·10⁻²¹ / 8·10⁻²⁰ ≈ 0,021 m'},
-   {p:'Javob:',f:'r ≈ 2,1 sm'}]),
-ex(8,3,'Aylanish davri','hisoblash','Elektron induksiyasi 0,01 T magnit maydonda aylanadi. Aylanish davrini nanosekundda toping. (m = 9,1·10⁻³¹ kg)',
+   {p:'Perpendikulyar holat:',f:'F = 1,6·10^{-19} · 10^{6} · 0,2'},
+   {p:'Javob:',f:'F = 3,2·10^{-14}\\text{ N}'}]),
+exn(8,'qollash','Aylana radiusi','hisoblash','Proton 10⁶ m/s tezlik bilan 0,5 T maydonga perpendikulyar kirdi. Aylana radiusini santimetrda toping.',
+  [{s:'m',v:'1,67·10⁻²⁷ kg'},{s:'v',v:'10⁶ m/s'},{s:'B',v:'0,5 T'},{s:'q',v:'1,6·10⁻¹⁹ C'}],2.1,'sm',0.05,
+  ['Lorens kuchi markazga intilma kuch rolini bajaradi: r = mv/(qB).','Natijani 100 ga ko‘paytirib santimetrga o‘tkazing.'],
+  [{p:'Lorens kuchi markazga intilma kuchga teng:',f:'q·v·B = \\frac{m·v^2}{r} \\;\\;⇒\\;\\; r = \\frac{m·v}{q·B}'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'r = \\frac{1,67·10^{-27} · 10^{6}}{1,6·10^{-19} · 0,5}'},
+   {p:'Hisoblaymiz:',f:'r = \\frac{1,67·10^{-21}}{8·10^{-20}} ≈ 0,021\\text{ m}'},
+   {p:'Javob:',f:'r ≈ 2,1\\text{ sm}'}]),
+exn(8,'qollash','Aylanish davri','hisoblash','Elektron induksiyasi 0,01 T magnit maydonda aylanadi. Aylanish davrini nanosekundda toping.',
   [{s:'m',v:'9,1·10⁻³¹ kg'},{s:'B',v:'0,01 T'},{s:'q',v:'1,6·10⁻¹⁹ C'}],3.6,'ns',0.05,
   ['T = 2πm/(qB) — davr tezlikka bog‘liq emas.','1 ns = 10⁻⁹ s.'],
-  [{p:'Aylanish davri:',f:'T = 2π·m / (q·B)'},
-   {p:'Qiymatlarni qo‘yamiz:',f:'T = 6,28 · 9,1·10⁻³¹ / (1,6·10⁻¹⁹ · 0,01)'},
-   {p:'Hisoblaymiz:',f:'T = 5,72·10⁻³⁰ / 1,6·10⁻²¹ ≈ 3,6·10⁻⁹ s'},
-   {p:'Javob:',f:'T ≈ 3,6 ns'}]),
-/* 9 */
-ex(9,1,'Magnit oqimi','hisoblash','Yuzasi 0,05 m² bo‘lgan kontur induksiyasi 0,4 T maydonga perpendikulyar joylashgan. Magnit oqimini toping.',
+  [{p:'Aylanish davri:',f:'T = \\frac{2π·m}{q·B}'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'T = \\frac{6,28 · 9,1·10^{-31}}{1,6·10^{-19} · 0,01}'},
+   {p:'Hisoblaymiz:',f:'T = \\frac{5,72·10^{-30}}{1,6·10^{-21}} ≈ 3,6·10^{-9}\\text{ s}'},
+   {p:'Javob:',f:'T ≈ 3,6\\text{ ns}'}]),
+exn(8,'mulohaza','Tezlikni topish','hisoblash','Elektron 0,02 T magnit maydonda radiusi 1 sm bo‘lgan aylana bo‘ylab harakatlanmoqda. Uning tezligini toping.',
+  [{s:'B',v:'0,02 T'},{s:'r',v:'1 sm'},{s:'m',v:'9,1·10⁻³¹ kg'},{s:'q',v:'1,6·10⁻¹⁹ C'}],3.5e7,'m/s',0.04,
+  ['r = mv/(qB) formulasidan v ni ajrating.','r = 0,01 m ekanini unutmang.'],
+  [{p:'Formuladan tezlikni ajratamiz:',f:'r = \\frac{m·v}{q·B} \\;\\;⇒\\;\\; v = \\frac{q·B·r}{m}'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'v = \\frac{1,6·10^{-19} · 0,02 · 0,01}{9,1·10^{-31}}'},
+   {p:'Hisoblaymiz:',f:'v = \\frac{3,2·10^{-23}}{9,1·10^{-31}}'},
+   {p:'Javob:',f:'v ≈ 3,5·10^{7}\\text{ m/s}'}]),
+exn(8,'mulohaza','Proton va elektron','formula','Proton va elektron bir xil kuchlanishda tezlashtirildi. Protonning tezligi elektronnikidan necha marta kichik? (m_p/m_e = 1836)',
+  [{s:'U',v:'bir xil'},{s:'m_p/m_e',v:'1836'}],42.8,'marta',0.04,
+  ['v = √(2qU/m) — tezlik massaning kvadrat ildiziga teskari proporsional.','√1836 ≈ ?'],
+  [{p:'Tezlik formulasi:',f:'v = \\sqrt{\\frac{2qU}{m}} \\;\\;⇒\\;\\; v \\sim \\frac{1}{\\sqrt{m}}'},
+   {p:'Tezliklar nisbati:',f:'\\frac{v_e}{v_p} = \\sqrt{\\frac{m_p}{m_e}} = \\sqrt{1836}'},
+   {p:'Javob:',f:'≈ 42,8\\text{ marta kichik}'}]),
+
+/* ===== 9. Elektromagnit induksiya ===== */
+exc(9,'bilish','Induksiya sharti','tushuncha','Yopiq konturda induksiya toki qachon paydo bo‘ladi?',
+  ['Konturni kesib o‘tuvchi magnit oqimi o‘zgarganda','Kontur magnit maydonda turganda','Magnit oqimi katta bo‘lganda','Kontur qarshiligi kichik bo‘lganda'],0,
+  'Muhim shart — oqimning o‘zgarishi, uning kattaligi emas. Oqimni B ni, S ni yoki burchakni o‘zgartirib o‘zgartirish mumkin.'),
+exn(9,'bilish','Magnit oqimi','hisoblash','Yuzasi 0,05 m² bo‘lgan kontur induksiyasi 0,4 T maydonga perpendikulyar joylashgan. Magnit oqimini toping.',
   [{s:'B',v:'0,4 T'},{s:'S',v:'0,05 m²'},{s:'α',v:'0°'}],0.02,'Wb',0.02,
   ['Φ = B·S·cosα; normal maydon bo‘ylab bo‘lsa cosα = 1.','0,4 · 0,05 = ?'],
   [{p:'Magnit oqimi:',f:'Φ = B·S·cosα'},
    {p:'Kontur maydonga perpendikulyar ⇒ cosα = 1:',f:'Φ = 0,4 · 0,05'},
-   {p:'Javob:',f:'Φ = 0,02 Wb'}]),
-ex(9,2,'Induksiya EYuK','hisoblash','200 o‘ramli g‘altakdagi magnit oqimi 0,04 s ichida 0,01 Wb ga o‘zgardi. Induksiya EYuK ini toping.',
+   {p:'Javob:',f:'Φ = 0,02\\text{ Wb}'}]),
+exn(9,'qollash','Induksiya EYuK','hisoblash','200 o‘ramli g‘altakdagi magnit oqimi 0,04 s ichida 0,01 Wb ga o‘zgardi. Induksiya EYuK ini toping.',
   [{s:'N',v:'200'},{s:'ΔΦ',v:'0,01 Wb'},{s:'Δt',v:'0,04 s'}],50,'V',0.02,
-  ['ε = N·ΔΦ/Δt — o‘ramlar sonini unutmang.','0,01/0,04 = 0,25; 200 ga ko‘paytiring.'],
-  [{p:'Faradey qonuni (g‘altak uchun):',f:'|ε| = N · ΔΦ / Δt'},
-   {p:'Qiymatlarni qo‘yamiz:',f:'|ε| = 200 · 0,01 / 0,04'},
-   {p:'Javob:',f:'ε = 50 V'}]),
-ex(9,3,'Harakatlanuvchi o‘tkazgich','hisoblash','Uzunligi 0,25 m o‘tkazgich 0,8 T maydonda 4 m/s tezlik bilan perpendikulyar harakatlanadi. Zanjir qarshiligi 0,5 Ω bo‘lsa, tok kuchini toping.',
+  ['ε = N·ΔΦ/Δt — o‘ramlar sonini unutmang.','0,01/0,04 = 0,25.'],
+  [{p:'Faradey qonuni (g‘altak uchun):',f:'\\abs{ε} = N·\\frac{ΔΦ}{Δt}'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'\\abs{ε} = 200 · \\frac{0,01}{0,04}'},
+   {p:'Javob:',f:'ε = 50\\text{ V}'}]),
+exn(9,'qollash','Harakatlanuvchi o‘tkazgich','hisoblash','Uzunligi 0,25 m o‘tkazgich 0,8 T maydonda 4 m/s tezlik bilan perpendikulyar harakatlanadi. Zanjir qarshiligi 0,5 Ω bo‘lsa, tok kuchini toping.',
   [{s:'B',v:'0,8 T'},{s:'l',v:'0,25 m'},{s:'v',v:'4 m/s'},{s:'R',v:'0,5 Ω'}],1.6,'A',0.02,
   ['Avval ε = B·l·v ni toping, so‘ng Om qonunini qo‘llang.','ε = 0,8 V.'],
-  [{p:'Harakatlanuvchi o‘tkazgichda EYuK:',f:'ε = B·l·v = 0,8 · 0,25 · 4 = 0,8 V'},
-   {p:'Om qonuni:',f:'I = ε / R = 0,8 / 0,5'},
-   {p:'Javob:',f:'I = 1,6 A'}]),
-/* 10 */
-ex(10,1,'Magnit maydon energiyasi','hisoblash','Induktivligi 0,4 H g‘altakdan 5 A tok oqadi. Magnit maydon energiyasini toping.',
+  [{p:'Harakatlanuvchi o‘tkazgichda EYuK:',f:'ε = B·l·v = 0,8 · 0,25 · 4 = 0,8\\text{ V}'},
+   {p:'Om qonuni:',f:'I = \\frac{ε}{R} = \\frac{0,8}{0,5}'},
+   {p:'Javob:',f:'I = 1,6\\text{ A}'}]),
+exn(9,'mulohaza','Konturni burish','hisoblash','Yuzasi 400 sm² bo‘lgan bir o‘ramli kontur 0,6 T bir jinsli maydonda perpendikulyar turibdi. Konturni 0,1 s ichida 90° ga bursak, o‘rtacha induksiya EYuK qancha bo‘ladi?',
+  [{s:'S',v:'400 sm²'},{s:'B',v:'0,6 T'},{s:'Δt',v:'0,1 s'}],0.24,'V',0.03,
+  ['Boshida cosα = 1, oxirida cos90° = 0 — demak oqim to‘liq yo‘qoladi.','S = 400 sm² = 0,04 m².'],
+  [{p:'Boshlang‘ich va oxirgi oqim:',f:'Φ_1 = B·S = 0,6 · 0,04 = 0,024\\text{ Wb}\\;\\; Φ_2 = 0'},
+   {p:'Faradey qonuni:',f:'\\abs{ε} = \\frac{ΔΦ}{Δt} = \\frac{0,024}{0,1}'},
+   {p:'Javob:',f:'ε = 0,24\\text{ V}'}]),
+exn(9,'mulohaza','Induksiya zaryadi','hisoblash','50 o‘ramli g‘altak zanjirining qarshiligi 2 Ω. Magnit oqimi 0,2 s ichida 0,04 Wb ga o‘zgardi. Zanjirdan o‘tgan zaryadni toping.',
+  [{s:'N',v:'50'},{s:'R',v:'2 Ω'},{s:'ΔΦ',v:'0,04 Wb'},{s:'Δt',v:'0,2 s'}],1,'C',0.03,
+  ['q = I·Δt va I = ε/R, ε = N·ΔΦ/Δt — Δt qisqaradi.','Natijada q = N·ΔΦ/R, ya’ni zaryad vaqtga bog‘liq emas.'],
+  [{p:'Induksiya EYuK va tok:',f:'ε = N·\\frac{ΔΦ}{Δt}\\;\\; I = \\frac{ε}{R}'},
+   {p:'O‘tgan zaryad:',f:'q = I·Δt = \\frac{N·ΔΦ}{R}'},
+   {p:'Hisoblaymiz:',f:'q = \\frac{50 · 0,04}{2} = \\frac{2}{2}'},
+   {p:'Javob:',f:'q = 1\\text{ C} \\;\\;—\\;\\; \\text{vaqtga bog‘liq emas}'}]),
+
+/* ===== 10. O'zinduksiya ===== */
+exc(10,'bilish','Induktivlik','tushuncha','G‘altak induktivligi nimaga bog‘liq?',
+  ['G‘altak o‘lchami, o‘ramlar soni va o‘zagiga','Undan oqayotgan tok kuchiga','Zanjirdagi kuchlanishga','Manbaning ichki qarshiligiga'],0,
+  'L = Φ/I nisbat sifatida aniqlansa ham, uning qiymati faqat geometriya va o‘zakka bog‘liq — tokni o‘zgartirish L ni o‘zgartirmaydi.'),
+exn(10,'bilish','Magnit maydon energiyasi','hisoblash','Induktivligi 0,4 H g‘altakdan 5 A tok oqadi. Magnit maydon energiyasini toping.',
   [{s:'L',v:'0,4 H'},{s:'I',v:'5 A'}],5,'J',0.02,
   ['W = L·I²/2.','I² = 25.'],
-  [{p:'Magnit maydon energiyasi:',f:'W = L·I² / 2'},
-   {p:'Hisoblaymiz:',f:'W = 0,4 · 25 / 2 = 10 / 2'},
-   {p:'Javob:',f:'W = 5 J'}]),
-ex(10,2,'O‘zinduksiya EYuK','hisoblash','Induktivligi 0,6 H g‘altakdagi tok 0,05 s ichida 3 A ga o‘zgardi. O‘zinduksiya EYuK modulini toping.',
+  [{p:'Magnit maydon energiyasi:',f:'W = \\frac{L·I^2}{2}'},
+   {p:'Hisoblaymiz:',f:'W = \\frac{0,4 · 25}{2} = \\frac{10}{2}'},
+   {p:'Javob:',f:'W = 5\\text{ J}'}]),
+exn(10,'qollash','O‘zinduksiya EYuK','hisoblash','Induktivligi 0,6 H g‘altakdagi tok 0,05 s ichida 3 A ga o‘zgardi. O‘zinduksiya EYuK modulini toping.',
   [{s:'L',v:'0,6 H'},{s:'ΔI',v:'3 A'},{s:'Δt',v:'0,05 s'}],36,'V',0.02,
   ['|ε| = L·ΔI/Δt.','3/0,05 = 60.'],
-  [{p:'O‘zinduksiya EYuK:',f:'|ε| = L · ΔI / Δt'},
-   {p:'Qiymatlarni qo‘yamiz:',f:'|ε| = 0,6 · 3 / 0,05 = 0,6 · 60'},
-   {p:'Javob:',f:'ε = 36 V'}]),
-ex(10,3,'Solenoid induktivligi','hisoblash','Uzunligi 0,4 m, o‘ramlar soni 800, kesim yuzasi 10 sm² bo‘lgan solenoid induktivligini millihenrida toping. (o‘zak yo‘q)',
+  [{p:'O‘zinduksiya EYuK:',f:'\\abs{ε} = L·\\frac{ΔI}{Δt}'},
+   {p:'Qiymatlarni qo‘yamiz:',f:'\\abs{ε} = 0,6 · \\frac{3}{0,05} = 0,6 · 60'},
+   {p:'Javob:',f:'ε = 36\\text{ V}'}]),
+exn(10,'qollash','Solenoid induktivligi','hisoblash','Uzunligi 0,4 m, o‘ramlar soni 800, kesim yuzasi 10 sm² bo‘lgan solenoid induktivligini millihenrida toping.',
   [{s:'N',v:'800'},{s:'l',v:'0,4 m'},{s:'S',v:'10 sm²'}],2,'mH',0.06,
   ['L = μ₀·n²·V, bunda n = N/l va V = S·l.','n = 2000 m⁻¹, V = 4·10⁻⁴ m³.'],
-  [{p:'Birlik uzunlikdagi o‘ramlar soni va hajm:',f:'n = N/l = 2000 m⁻¹,&nbsp; V = S·l = 10⁻³ · 0,4 = 4·10⁻⁴ m³'},
-   {p:'Solenoid induktivligi:',f:'L = μ₀·n²·V = 4π·10⁻⁷ · 4·10⁶ · 4·10⁻⁴'},
-   {p:'Hisoblaymiz:',f:'L ≈ 2,0·10⁻³ H'},
-   {p:'Javob:',f:'L ≈ 2 mH'}]),
-/* 11 */
-ex(11,1,'Tomson formulasi','hisoblash','L = 2 H va C = 0,5 μF bo‘lgan konturda erkin tebranishlar davrini millisekundda toping.',
+  [{p:'O‘ramlar zichligi va hajm:',f:'n = \\frac{N}{l} = 2000\\;\\; V = S·l = 4·10^{-4}'},
+   {p:'Solenoid induktivligi:',f:'L = μ_0·n^2·V = 4π·10^{-7} · 4·10^{6} · 4·10^{-4}'},
+   {p:'Javob:',f:'L ≈ 2·10^{-3}\\text{ H} = 2\\text{ mH}'}]),
+exn(10,'mulohaza','Induktivlikni topish','hisoblash','G‘altakdan 3 A tok oqqanda uning magnit maydonida 0,45 J energiya to‘plangan. Induktivlikni toping.',
+  [{s:'W',v:'0,45 J'},{s:'I',v:'3 A'}],0.1,'H',0.03,
+  ['W = LI²/2 formulasidan L ni ajrating.','L = 2W/I².'],
+  [{p:'Formuladan induktivlikni ajratamiz:',f:'W = \\frac{L·I^2}{2} \\;\\;⇒\\;\\; L = \\frac{2W}{I^2}'},
+   {p:'Hisoblaymiz:',f:'L = \\frac{2 · 0,45}{9} = \\frac{0,9}{9}'},
+   {p:'Javob:',f:'L = 0,1\\text{ H}'}]),
+exn(10,'mulohaza','Zanjirni uzish','hisoblash','Induktivligi 0,25 H g‘altakdagi 4 A tok 0,02 s ichida nolgacha kamaydi. O‘zinduksiya EYuK modulini toping.',
+  [{s:'L',v:'0,25 H'},{s:'ΔI',v:'4 A'},{s:'Δt',v:'0,02 s'}],50,'V',0.02,
+  ['Tokning o‘zgarishi 4 A, vaqt juda qisqa — EYuK katta chiqadi.','Shu sababli zanjir uzilganda uchqun paydo bo‘ladi.'],
+  [{p:'O‘zinduksiya EYuK:',f:'\\abs{ε} = L·\\frac{ΔI}{Δt}'},
+   {p:'Hisoblaymiz:',f:'\\abs{ε} = 0,25 · \\frac{4}{0,02} = 0,25 · 200'},
+   {p:'Javob:',f:'ε = 50\\text{ V} \\;\\;—\\;\\; \\text{manba kuchlanishidan ancha katta}'}]),
+
+/* ===== 11. Elektromagnit tebranishlar ===== */
+exc(11,'bilish','Tebranish konturi','tushuncha','Ideal tebranish konturida nima saqlanadi?',
+  ['Elektr va magnit maydon energiyalarining yig‘indisi','Faqat kondensator energiyasi','Faqat g‘altak energiyasi','Tok kuchi'],0,
+  'q²/(2C) + LI²/2 = const. Energiya kondensator elektr maydonidan g‘altak magnit maydoniga va aksincha o‘tib turadi.'),
+exn(11,'bilish','Tomson formulasi','hisoblash','L = 2 H va C = 0,5 μF bo‘lgan konturda erkin tebranishlar davrini millisekundda toping.',
   [{s:'L',v:'2 H'},{s:'C',v:'0,5 μF'}],6.3,'ms',0.04,
-  ['T = 2π√(LC).','LC = 2 · 0,5·10⁻⁶ = 10⁻⁶, √ = 10⁻³.'],
-  [{p:'Tomson formulasi:',f:'T = 2π·√(L·C)'},
-   {p:'Ko‘paytmani topamiz:',f:'L·C = 2 · 0,5·10⁻⁶ = 10⁻⁶ ⇒ √(LC) = 10⁻³'},
-   {p:'Hisoblaymiz:',f:'T = 6,28 · 10⁻³ s'},
-   {p:'Javob:',f:'T ≈ 6,3 ms'}]),
-ex(11,2,'Xususiy chastota','hisoblash','L = 50 μH va C = 200 pF bo‘lgan konturning xususiy chastotasini megahertsda toping.',
+  ['T = 2π√(LC).','LC = 10⁻⁶, demak √(LC) = 10⁻³.'],
+  [{p:'Tomson formulasi:',f:'T = 2π·\\sqrt{L·C}'},
+   {p:'Ko‘paytmani topamiz:',f:'L·C = 2 · 0,5·10^{-6} = 10^{-6} \\;\\;⇒\\;\\; \\sqrt{LC} = 10^{-3}'},
+   {p:'Hisoblaymiz:',f:'T = 6,28·10^{-3}\\text{ s}'},
+   {p:'Javob:',f:'T ≈ 6,3\\text{ ms}'}]),
+exn(11,'qollash','Xususiy chastota','hisoblash','L = 50 μH va C = 200 pF bo‘lgan konturning xususiy chastotasini megahertsda toping.',
   [{s:'L',v:'50 μH'},{s:'C',v:'200 pF'}],1.6,'MHz',0.06,
-  ['ν = 1/(2π√(LC)).','LC = 5·10⁻⁵ · 2·10⁻¹⁰ = 10⁻¹⁴, √ = 10⁻⁷.'],
-  [{p:'Xususiy chastota:',f:'ν = 1 / (2π·√(L·C))'},
-   {p:'Ko‘paytmani topamiz:',f:'L·C = 5·10⁻⁵ · 2·10⁻¹⁰ = 10⁻¹⁴ ⇒ √(LC) = 10⁻⁷'},
-   {p:'Hisoblaymiz:',f:'ν = 1 / (6,28·10⁻⁷) ≈ 1,59·10⁶ Hz'},
-   {p:'Javob:',f:'ν ≈ 1,6 MHz'}]),
-ex(11,3,'Tok amplitudasi','hisoblash','Konturda C = 2 μF, L = 8 mH, kondensatordagi kuchlanish amplitudasi 10 V. Tok amplitudasini amperda toping.',
+  ['ν = 1/(2π√(LC)).','LC = 10⁻¹⁴, √(LC) = 10⁻⁷.'],
+  [{p:'Xususiy chastota:',f:'ν = \\frac{1}{2π\\sqrt{L·C}}'},
+   {p:'Ko‘paytmani topamiz:',f:'L·C = 5·10^{-5} · 2·10^{-10} = 10^{-14}'},
+   {p:'Hisoblaymiz:',f:'ν = \\frac{1}{6,28·10^{-7}} ≈ 1,59·10^{6}\\text{ Hz}'},
+   {p:'Javob:',f:'ν ≈ 1,6\\text{ MHz}'}]),
+exn(11,'qollash','Tok amplitudasi','hisoblash','Konturda C = 2 μF, L = 8 mH, kondensatordagi kuchlanish amplitudasi 10 V. Tok amplitudasini toping.',
   [{s:'C',v:'2 μF'},{s:'L',v:'8 mH'},{s:'U_m',v:'10 V'}],0.16,'A',0.06,
-  ['Energiya saqlanishidan: C·U_m²/2 = L·I_m²/2.','I_m = U_m·√(C/L).'],
-  [{p:'Energiyaning saqlanish qonuni:',f:'C·U_m² / 2 = L·I_m² / 2'},
-   {p:'Tok amplitudasini ajratamiz:',f:'I_m = U_m·√(C / L)'},
-   {p:'Hisoblaymiz:',f:'I_m = 10·√(2·10⁻⁶ / 8·10⁻³) = 10·√(2,5·10⁻⁴) = 10 · 0,0158'},
-   {p:'Javob:',f:'I_m ≈ 0,16 A'}]),
-/* 12 */
-ex(12,1,'Effektiv qiymatlar','hisoblash','O‘zgaruvchan kuchlanish amplitudasi 120 V. Effektiv kuchlanishni toping.',
+  ['Energiyaning saqlanishidan: C·U_m²/2 = L·I_m²/2.','I_m = U_m·√(C/L).'],
+  [{p:'Energiyaning saqlanish qonuni:',f:'\\frac{C·U_m^2}{2} = \\frac{L·I_m^2}{2}'},
+   {p:'Tok amplitudasini ajratamiz:',f:'I_m = U_m·\\sqrt{\\frac{C}{L}}'},
+   {p:'Hisoblaymiz:',f:'I_m = 10·\\sqrt{\\frac{2·10^{-6}}{8·10^{-3}}} = 10 · 0,0158'},
+   {p:'Javob:',f:'I_m ≈ 0,16\\text{ A}'}]),
+exn(11,'mulohaza','Konturni sozlash','hisoblash','Kontur 1 MHz chastotaga sozlanishi kerak. G‘altak induktivligi 25 μH bo‘lsa, kondensator sig‘imi qancha bo‘lishi lozim? Javobni pikofaradda yozing.',
+  [{s:'ν',v:'1 MHz'},{s:'L',v:'25 μH'}],1013,'pF',0.03,
+  ['Tomson formulasidan C ni ajrating: C = 1/(4π²ν²L).','4π² ≈ 39,48; ν² = 10¹².'],
+  [{p:'Chastota formulasidan sig‘imni ajratamiz:',f:'ν = \\frac{1}{2π\\sqrt{LC}} \\;\\;⇒\\;\\; C = \\frac{1}{4π^2·ν^2·L}'},
+   {p:'Maxrajni hisoblaymiz:',f:'39,48 · 10^{12} · 2,5·10^{-5} = 9,87·10^{8}'},
+   {p:'Sig‘imni topamiz:',f:'C = \\frac{1}{9,87·10^{8}} ≈ 1,01·10^{-9}\\text{ F}'},
+   {p:'Javob:',f:'C ≈ 1013\\text{ pF}'}]),
+exn(11,'mulohaza','Davrning o‘zgarishi','formula','Konturda induktivlik 2 marta, sig‘im 8 marta oshirildi. Tebranishlar davri necha marta ortadi?',
+  [{s:'L₂',v:'2L₁'},{s:'C₂',v:'8C₁'}],4,'marta',0.02,
+  ['T ~ √(LC) — ko‘paytma 16 marta ortadi.','√16 = ?'],
+  [{p:'Davrlar nisbati:',f:'\\frac{T_2}{T_1} = \\sqrt{\\frac{L_2·C_2}{L_1·C_1}}'},
+   {p:'Ko‘paytma 2 · 8 = 16 marta ortadi:',f:'\\frac{T_2}{T_1} = \\sqrt{16}'},
+   {p:'Javob:',f:'4\\text{ marta ortadi}'}]),
+
+/* ===== 12. O'zgaruvchan tok ===== */
+exc(12,'bilish','Effektiv qiymat','tushuncha','Rozetkadagi «220 V» qanday qiymat?',
+  ['Effektiv qiymat; amplituda ≈ 311 V','Amplituda qiymati','O‘rtacha qiymat','Maksimal quvvat'],0,
+  'O‘lchov asboblari effektiv (o‘rtacha kvadratik) qiymatni ko‘rsatadi: U = U_m/√2. Demak amplituda U_m = 220·√2 ≈ 311 V.'),
+exn(12,'bilish','Effektiv qiymat','hisoblash','O‘zgaruvchan kuchlanish amplitudasi 120 V. Effektiv kuchlanishni toping.',
   [{s:'U_m',v:'120 V'}],85,'V',0.03,
   ['U = U_m/√2.','√2 ≈ 1,41.'],
-  [{p:'Effektiv qiymat:',f:'U = U_m / √2'},
-   {p:'Hisoblaymiz:',f:'U = 120 / 1,41'},
-   {p:'Javob:',f:'U ≈ 85 V'}]),
-ex(12,2,'Transformator','hisoblash','220 V tarmoqqa ulangan transformatorning birlamchi o‘ramida 440 o‘ram bor. Ikkilamchi kuchlanish 12 V bo‘lishi uchun ikkilamchi o‘ramda qancha o‘ram bo‘lishi kerak?',
+  [{p:'Effektiv qiymat:',f:'U = \\frac{U_m}{\\sqrt{2}}'},
+   {p:'Hisoblaymiz:',f:'U = \\frac{120}{1,41}'},
+   {p:'Javob:',f:'U ≈ 85\\text{ V}'}]),
+exn(12,'qollash','Transformator','hisoblash','220 V tarmoqqa ulangan transformatorning birlamchi o‘ramida 440 o‘ram bor. Ikkilamchi kuchlanish 12 V bo‘lishi uchun ikkilamchi o‘ramda qancha o‘ram bo‘lishi kerak?',
   [{s:'U₁',v:'220 V'},{s:'N₁',v:'440'},{s:'U₂',v:'12 V'}],24,'o‘ram',0.03,
-  ['U₁/U₂ = N₁/N₂ ⇒ N₂ = N₁·U₂/U₁.','440/220 = 2 — bir voltga 2 o‘ram.'],
-  [{p:'Transformator munosabati:',f:'U₁ / U₂ = N₁ / N₂'},
-   {p:'N₂ ni ajratamiz:',f:'N₂ = N₁·U₂ / U₁ = 440 · 12 / 220'},
-   {p:'Javob:',f:'N₂ = 24 o‘ram'}]),
-ex(12,3,'Impedans','hisoblash','Ketma-ket RLC zanjirda R = 40 Ω, X_L = 60 Ω, X_C = 30 Ω, kuchlanish 100 V. Tok kuchini toping.',
+  ['U₁/U₂ = N₁/N₂ ⇒ N₂ = N₁·U₂/U₁.','440/220 = 2 — bir voltga 2 o‘ram to‘g‘ri keladi.'],
+  [{p:'Transformator munosabati:',f:'\\frac{U_1}{U_2} = \\frac{N_1}{N_2}'},
+   {p:'N₂ ni ajratamiz:',f:'N_2 = \\frac{N_1·U_2}{U_1} = \\frac{440 · 12}{220}'},
+   {p:'Javob:',f:'N_2 = 24\\text{ o‘ram}'}]),
+exn(12,'qollash','Induktiv qarshilik','hisoblash','Induktivligi 0,1 H g‘altak 50 Hz chastotali zanjirga ulangan. Induktiv qarshilikni toping.',
+  [{s:'L',v:'0,1 H'},{s:'ν',v:'50 Hz'}],31.4,'Ω',0.03,
+  ['X_L = ω·L, bunda ω = 2πν.','ω = 314 rad/s.'],
+  [{p:'Burchak chastotasi:',f:'ω = 2π·ν = 2π · 50 = 314\\text{ rad/s}'},
+   {p:'Induktiv qarshilik:',f:'X_L = ω·L = 314 · 0,1'},
+   {p:'Javob:',f:'X_L ≈ 31,4\\text{ Ω}'}]),
+exn(12,'mulohaza','RLC zanjir','hisoblash','Ketma-ket RLC zanjirda R = 40 Ω, X_L = 60 Ω, X_C = 30 Ω, kuchlanish 100 V. Tok kuchini toping.',
   [{s:'R',v:'40 Ω'},{s:'X_L',v:'60 Ω'},{s:'X_C',v:'30 Ω'},{s:'U',v:'100 V'}],2,'A',0.02,
-  ['Avval Z = √(R² + (X_L − X_C)²) ni toping.','X_L − X_C = 30, Z = √(1600+900) = 50 Ω.'],
-  [{p:'To‘liq qarshilik:',f:'Z = √(R² + (X_L − X_C)²)'},
-   {p:'Hisoblaymiz:',f:'Z = √(1600 + 900) = √2500 = 50 Ω'},
-   {p:'Om qonuni:',f:'I = U / Z = 100 / 50'},
-   {p:'Javob:',f:'I = 2 A'}]),
-/* 13 */
-ex(13,1,'To‘lqin uzunligi','hisoblash','Chastotasi 6·10¹⁴ Hz bo‘lgan yorug‘likning vakuumdagi to‘lqin uzunligini nanometrda toping.',
+  ['Avval to‘liq qarshilikni toping: Z = √(R² + (X_L − X_C)²).','X_L − X_C = 30, Z = √(1600 + 900).'],
+  [{p:'To‘liq qarshilik:',f:'Z = \\sqrt{R^2 + (X_L − X_C)^2}'},
+   {p:'Hisoblaymiz:',f:'Z = \\sqrt{1600 + 900} = \\sqrt{2500} = 50\\text{ Ω}'},
+   {p:'Om qonuni:',f:'I = \\frac{U}{Z} = \\frac{100}{50}'},
+   {p:'Javob:',f:'I = 2\\text{ A}'}]),
+exn(12,'mulohaza','Energiya uzatish','hisoblash','Transformator 220 V ni 8800 V ga oshiradi. Birlamchi o‘ramdagi tok 40 A bo‘lsa, ikkilamchi o‘ramdagi tokni toping (yo‘qotishlarni hisobga olmang).',
+  [{s:'U₁',v:'220 V'},{s:'U₂',v:'8800 V'},{s:'I₁',v:'40 A'}],1,'A',0.03,
+  ['Ideal transformatorda quvvat saqlanadi: U₁I₁ = U₂I₂.','Kuchlanish 40 marta ortgan, demak tok 40 marta kamayadi.'],
+  [{p:'Quvvatning saqlanishi:',f:'U_1·I_1 = U_2·I_2'},
+   {p:'Tokni ajratamiz:',f:'I_2 = \\frac{U_1·I_1}{U_2} = \\frac{220 · 40}{8800}'},
+   {p:'Javob:',f:'I_2 = 1\\text{ A} \\;\\;—\\;\\; \\text{shuning uchun liniyada yo‘qotish kam}'}]),
+
+/* ===== 13. Elektromagnit to'lqinlar ===== */
+exc(13,'bilish','To‘lqin tabiati','tushuncha','Elektromagnit to‘lqin qanday to‘lqin?',
+  ['Ko‘ndalang: E ⊥ B ⊥ v','Bo‘ylama: E va B tarqalish yo‘nalishi bo‘ylab','Faqat elektr maydondan iborat','Faqat magnit maydondan iborat'],0,
+  'E va B vektorlari bir-biriga ham, tarqalish yo‘nalishiga ham perpendikulyar. Shu sababli elektromagnit to‘lqin qutblanish xossasiga ega.'),
+exn(13,'bilish','To‘lqin uzunligi','hisoblash','Chastotasi 6·10¹⁴ Hz bo‘lgan yorug‘likning vakuumdagi to‘lqin uzunligini nanometrda toping.',
   [{s:'ν',v:'6·10¹⁴ Hz'},{s:'c',v:'3·10⁸ m/s'}],500,'nm',0.02,
   ['λ = c/ν.','1 nm = 10⁻⁹ m.'],
-  [{p:'To‘lqin uzunligi:',f:'λ = c / ν'},
-   {p:'Hisoblaymiz:',f:'λ = 3·10⁸ / 6·10¹⁴ = 5·10⁻⁷ m'},
-   {p:'Javob:',f:'λ = 500 nm (yashil yorug‘lik)'}]),
-ex(13,2,'Chastota','hisoblash','To‘lqin uzunligi 25 m bo‘lgan radiostansiyaning chastotasini megahertsda toping.',
+  [{p:'To‘lqin uzunligi:',f:'λ = \\frac{c}{ν}'},
+   {p:'Hisoblaymiz:',f:'λ = \\frac{3·10^{8}}{6·10^{14}} = 5·10^{-7}\\text{ m}'},
+   {p:'Javob:',f:'λ = 500\\text{ nm — yashil yorug‘lik}'}]),
+exn(13,'qollash','Chastota','hisoblash','To‘lqin uzunligi 25 m bo‘lgan radiostansiyaning chastotasini megahertsda toping.',
   [{s:'λ',v:'25 m'},{s:'c',v:'3·10⁸ m/s'}],12,'MHz',0.02,
   ['ν = c/λ.','1 MHz = 10⁶ Hz.'],
-  [{p:'Chastota:',f:'ν = c / λ'},
-   {p:'Hisoblaymiz:',f:'ν = 3·10⁸ / 25 = 1,2·10⁷ Hz'},
-   {p:'Javob:',f:'ν = 12 MHz (qisqa to‘lqin diapazoni)'}]),
-ex(13,3,'Muhitdagi to‘lqin','hisoblash','Chastotasi 5·10¹⁴ Hz bo‘lgan yorug‘lik ε = 2,25 va μ = 1 bo‘lgan muhitga kirdi. Muhitdagi to‘lqin uzunligini nanometrda toping.',
+  [{p:'Chastota:',f:'ν = \\frac{c}{λ}'},
+   {p:'Hisoblaymiz:',f:'ν = \\frac{3·10^{8}}{25} = 1,2·10^{7}\\text{ Hz}'},
+   {p:'Javob:',f:'ν = 12\\text{ MHz — qisqa to‘lqin diapazoni}'}]),
+exn(13,'qollash','Muhitdagi to‘lqin','hisoblash','Chastotasi 5·10¹⁴ Hz bo‘lgan yorug‘lik ε = 2,25 va μ = 1 bo‘lgan muhitga kirdi. Muhitdagi to‘lqin uzunligini nanometrda toping.',
   [{s:'ν',v:'5·10¹⁴ Hz'},{s:'ε',v:'2,25'},{s:'μ',v:'1'}],400,'nm',0.03,
-  ['Avval muhitdagi tezlikni toping: v = c/√(εμ).','√2,25 = 1,5 ⇒ v = 2·10⁸ m/s; so‘ng λ = v/ν.'],
-  [{p:'Muhitdagi tezlik:',f:'v = c / √(ε·μ) = 3·10⁸ / 1,5 = 2·10⁸ m/s'},
-   {p:'To‘lqin uzunligi:',f:'λ = v / ν = 2·10⁸ / 5·10¹⁴ = 4·10⁻⁷ m'},
-   {p:'Javob:',f:'λ = 400 nm (chastota o‘zgarmaydi, uzunlik kamayadi)'}]),
-/* 14 */
-ex(14,1,'Radiolokatsiya','hisoblash','Radiolokator signali 0,4 ms dan keyin qaytdi. Nishongacha masofani kilometrda toping.',
+  ['Avval muhitdagi tezlikni toping: v = c/√(εμ).','√2,25 = 1,5, demak v = 2·10⁸ m/s.'],
+  [{p:'Muhitdagi tezlik:',f:'v = \\frac{c}{\\sqrt{ε·μ}} = \\frac{3·10^{8}}{1,5} = 2·10^{8}'},
+   {p:'To‘lqin uzunligi (chastota o‘zgarmaydi):',f:'λ = \\frac{v}{ν} = \\frac{2·10^{8}}{5·10^{14}}'},
+   {p:'Javob:',f:'λ = 400\\text{ nm}'}]),
+exn(13,'mulohaza','Sinish ko‘rsatkichi','hisoblash','Yorug‘lik dielektrik singdiruvchanligi ε = 1,77 bo‘lgan muhitga kirdi (μ = 1). Undagi tezlikni 10⁸ m/s birligida toping.',
+  [{s:'ε',v:'1,77'},{s:'μ',v:'1'},{s:'c',v:'3·10⁸ m/s'}],2.25,'·10⁸ m/s',0.03,
+  ['v = c/√(εμ).','√1,77 ≈ 1,33 — bu suvning sinish ko‘rsatkichi.'],
+  [{p:'Muhitdagi tezlik:',f:'v = \\frac{c}{\\sqrt{ε·μ}}'},
+   {p:'Ildizni hisoblaymiz:',f:'\\sqrt{1,77} ≈ 1,33'},
+   {p:'Tezlikni topamiz:',f:'v = \\frac{3·10^{8}}{1,33} ≈ 2,25·10^{8}'},
+   {p:'Javob:',f:'v ≈ 2,25·10^{8}\\text{ m/s — suvdagi yorug‘lik tezligi}'}]),
+exn(13,'mulohaza','Kosmik masofa','hisoblash','Quyoshdan Yergacha masofa 1,5·10¹¹ m. Yorug‘lik bu masofani necha minutda bosib o‘tadi?',
+  [{s:'L',v:'1,5·10¹¹ m'},{s:'c',v:'3·10⁸ m/s'}],8.33,'min',0.02,
+  ['t = L/c, natija sekundda chiqadi.','Sekundni minutga o‘tkazish uchun 60 ga bo‘ling.'],
+  [{p:'Vaqt:',f:'t = \\frac{L}{c} = \\frac{1,5·10^{11}}{3·10^{8}} = 500\\text{ s}'},
+   {p:'Minutga o‘tkazamiz:',f:'t = \\frac{500}{60}'},
+   {p:'Javob:',f:'t ≈ 8,33\\text{ min}'}]),
+
+/* ===== 14. Radioaloqa ===== */
+exc(14,'bilish','Detektorlash','tushuncha','Radiopriyomnikdagi detektorning vazifasi nima?',
+  ['Modulyatsiyalangan signaldan past chastotali tovush signalini ajratish','Tashuvchi to‘lqinni hosil qilish','Signalni modulyatsiyalash','Antennani sozlash'],0,
+  'Detektor (diod) signalni bir yarim davrga to‘g‘rilaydi, filtr yuqori chastotani yo‘qotadi — natijada boshlang‘ich tovush signali ajraladi.'),
+exn(14,'bilish','Radiolokatsiya','hisoblash','Radiolokator signali 0,4 ms dan keyin qaytdi. Nishongacha masofani kilometrda toping.',
   [{s:'t',v:'0,4 ms'},{s:'c',v:'3·10⁸ m/s'}],60,'km',0.02,
   ['R = c·t/2 — signal borib-kelgani uchun 2 ga bo‘linadi.','0,4 ms = 4·10⁻⁴ s.'],
-  [{p:'Radiolokatsiya formulasi:',f:'R = c·t / 2'},
-   {p:'Vaqtni SI ga keltiramiz:',f:'t = 0,4 ms = 4·10⁻⁴ s'},
-   {p:'Hisoblaymiz:',f:'R = 3·10⁸ · 4·10⁻⁴ / 2 = 6·10⁴ m'},
-   {p:'Javob:',f:'R = 60 km'}]),
-ex(14,2,'Antenna','hisoblash','Chastotasi 150 MHz bo‘lgan radiostansiya uchun chorak to‘lqinli antenna uzunligini metrda toping.',
+  [{p:'Radiolokatsiya formulasi:',f:'R = \\frac{c·t}{2}'},
+   {p:'Vaqtni SI ga keltiramiz:',f:'t = 0,4\\text{ ms} = 4·10^{-4}\\text{ s}'},
+   {p:'Hisoblaymiz:',f:'R = \\frac{3·10^{8} · 4·10^{-4}}{2} = 6·10^{4}\\text{ m}'},
+   {p:'Javob:',f:'R = 60\\text{ km}'}]),
+exn(14,'qollash','Antenna','hisoblash','Chastotasi 150 MHz bo‘lgan radiostansiya uchun chorak to‘lqinli antenna uzunligini metrda toping.',
   [{s:'ν',v:'150 MHz'},{s:'c',v:'3·10⁸ m/s'}],0.5,'m',0.02,
   ['Avval λ = c/ν ni toping, so‘ng 4 ga bo‘ling.','λ = 2 m.'],
-  [{p:'To‘lqin uzunligi:',f:'λ = c / ν = 3·10⁸ / 1,5·10⁸ = 2 m'},
-   {p:'Chorak to‘lqinli antenna:',f:'l = λ / 4 = 2 / 4'},
-   {p:'Javob:',f:'l = 0,5 m'}]),
-ex(14,3,'Radiolokatsiya','hisoblash','Nishon radiolokatordan 45 km masofada. Signal necha mikrosekunddan keyin qaytadi?',
+  [{p:'To‘lqin uzunligi:',f:'λ = \\frac{c}{ν} = \\frac{3·10^{8}}{1,5·10^{8}} = 2\\text{ m}'},
+   {p:'Chorak to‘lqinli antenna:',f:'l = \\frac{λ}{4} = \\frac{2}{4}'},
+   {p:'Javob:',f:'l = 0,5\\text{ m}'}]),
+exn(14,'qollash','Radiolokatsiya','hisoblash','Nishon radiolokatordan 45 km masofada. Signal necha mikrosekunddan keyin qaytadi?',
   [{s:'R',v:'45 km'},{s:'c',v:'3·10⁸ m/s'}],300,'μs',0.02,
-  ['R = ct/2 formulasidan t ni ajratib oling: t = 2R/c.','45 km = 4,5·10⁴ m; 1 μs = 10⁻⁶ s.'],
-  [{p:'Formuladan vaqtni ajratamiz:',f:'R = c·t/2 ⇒ t = 2R / c'},
-   {p:'Masofani SI ga keltiramiz:',f:'R = 45 km = 4,5·10⁴ m'},
-   {p:'Hisoblaymiz:',f:'t = 2 · 4,5·10⁴ / 3·10⁸ = 3·10⁻⁴ s'},
-   {p:'Javob:',f:'t = 300 μs'}])
+  ['R = ct/2 formulasidan t = 2R/c.','45 km = 4,5·10⁴ m; 1 μs = 10⁻⁶ s.'],
+  [{p:'Formuladan vaqtni ajratamiz:',f:'R = \\frac{c·t}{2} \\;\\;⇒\\;\\; t = \\frac{2R}{c}'},
+   {p:'Masofani keltiramiz:',f:'R = 45\\text{ km} = 4,5·10^{4}\\text{ m}'},
+   {p:'Hisoblaymiz:',f:'t = \\frac{2 · 4,5·10^{4}}{3·10^{8}} = 3·10^{-4}\\text{ s}'},
+   {p:'Javob:',f:'t = 300\\text{ μs}'}]),
+exn(14,'mulohaza','Tashuvchi to‘lqin','hisoblash','Radiostansiya 1,5 MHz chastotada ishlaydi. Tashuvchi to‘lqin uzunligini metrda toping.',
+  [{s:'ν',v:'1,5 MHz'},{s:'c',v:'3·10⁸ m/s'}],200,'m',0.02,
+  ['λ = c/ν.','1,5 MHz = 1,5·10⁶ Hz.'],
+  [{p:'To‘lqin uzunligi:',f:'λ = \\frac{c}{ν}'},
+   {p:'Hisoblaymiz:',f:'λ = \\frac{3·10^{8}}{1,5·10^{6}}'},
+   {p:'Javob:',f:'λ = 200\\text{ m — o‘rta to‘lqin diapazoni}'}]),
+exn(14,'mulohaza','Priyomnikni sozlash','hisoblash','Qabul qilgich konturidagi g‘altak induktivligi 0,2 mH. 200 m to‘lqinni qabul qilish uchun kondensator sig‘imi qancha bo‘lishi kerak? Javobni pikofaradda yozing.',
+  [{s:'λ',v:'200 m'},{s:'L',v:'0,2 mH'},{s:'c',v:'3·10⁸ m/s'}],56.3,'pF',0.05,
+  ['Avval chastotani toping: ν = c/λ = 1,5 MHz.','So‘ng Tomson formulasidan C = 1/(4π²ν²L).'],
+  [{p:'Kerakli chastota:',f:'ν = \\frac{c}{λ} = \\frac{3·10^{8}}{200} = 1,5·10^{6}\\text{ Hz}'},
+   {p:'Tomson formulasidan sig‘imni ajratamiz:',f:'C = \\frac{1}{4π^2·ν^2·L}'},
+   {p:'Maxrajni hisoblaymiz:',f:'39,48 · 2,25·10^{12} · 2·10^{-4} = 1,78·10^{10}'},
+   {p:'Javob:',f:'C ≈ 5,63·10^{-11}\\text{ F} = 56,3\\text{ pF}'}])
 ];
+
 const E_BY_M = {};
 EXERCISES.forEach(function(x){ (E_BY_M[x.m] = E_BY_M[x.m] || []).push(x); });
+const E_BY_CAT = {};
+EXERCISES.forEach(function(x){ const k=x.m+'|'+x.cat; (E_BY_CAT[k]=E_BY_CAT[k]||[]).push(x); });
 </script>
 <script>
 /* ============ LABORATORIYA ISHLARI ============ */
 const LABS = [
-{id:1,m:1,sim:'electroscope',title:'Jismlarni elektrlash va elektroskob yordamida zaryad belgisini aniqlash',
+{id:1,m:1,sim:'electroscope',
+ meas:{name:'Yaproqchalar burchagi θ',unit:'°',col:1},title:'Jismlarni elektrlash va elektroskob yordamida zaryad belgisini aniqlash',
  goal:'Ishqalanish va ta’sir orqali elektrlashni kuzatish, elektroskob yordamida zaryadning mavjudligi va belgisini aniqlash.',
  theory:'Elektroskob — ingichka o‘qqa osilgan yengil yaproqchalardan iborat asbob. Zaryadlangan jism uchiga tegsa, zaryad yaproqchalarga tarqaladi; bir xil ishorali zaryadlar itarishgani uchun yaproqchalar yoziladi. Yozilish burchagi zaryad modulini baholashga imkon beradi, belgisi esa ma’lum ishorali zaryad bilan tekshiriladi: bir xil ishorada burchak ortadi, har xil ishorada kamayadi.',
  steps:['Tayoqchani mato bilan ishqalab zaryadlang (material tanlovi zaryad belgisini belgilaydi).','Tayoqchani elektroskob sharchasiga tegizib, zaryadni ko‘chiring — yaproqchalar yoziladi.','Yozilish burchagini qayd qiling.','Ma’lum ishorali zaryadni yaqinlashtirib, burchak ortishi yoki kamayishini kuzatib belgisini aniqlang.','Zaryadni oshirib tajribani qayta bajaring va burchak qanday o‘zgarishini jadvalga yozing.'],
  task:{type:'num',q:'Elektroskobga 3 birlik zaryad berilganda yaproqchalar burchagi 42° bo‘ldi. Zaryadni 6 birlikka oshirsangiz burchak qanchaga yetadi? (simulyatordan o‘lchab toping)',unit:'°',ans:65,tol:0.06},
  links:[{l:'Vascak: Vimshurst mashinasi va elektrlash',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=ele_wimshurst&l=uz'}]},
 
-{id:2,m:3,sim:'capbank',title:'Kondensatorlarni ketma-ket va parallel ulashda umumiy sig‘imni aniqlash',
+{id:2,m:3,sim:'capbank',
+ meas:{name:'Umumiy sig‘im C',unit:'μF',col:3},title:'Kondensatorlarni ketma-ket va parallel ulashda umumiy sig‘imni aniqlash',
  goal:'Ikki kondensatorni ketma-ket va parallel ulab, umumiy sig‘imni o‘lchash va nazariy formulalar bilan solishtirish.',
  theory:'Parallel ulashda plastinka yuzasi kattalashgandek bo‘ladi, shuning uchun sig‘imlar qo‘shiladi: C = C₁ + C₂. Ketma-ket ulashda zaryad bir xil, kuchlanishlar qo‘shiladi, shuning uchun 1/C = 1/C₁ + 1/C₂ va umumiy sig‘im har qaysi kondensator sig‘imidan kichik bo‘ladi. Sig‘imni o‘lchash uchun ma’lum kuchlanishda to‘plangan zaryad o‘lchanadi: C = q/U.',
  steps:['C₁ va C₂ sig‘imlarini belgilang.','Parallel ulanishni tanlab, umumiy zaryad va kuchlanishdan C ni o‘lchang.','Ketma-ket ulanishga o‘tib, o‘lchashni takrorlang.','Har ikki holatni nazariy formula bilan solishtirib, xatolikni baholang.','C₁ ni o‘zgartirib, ketma-ket ulashda umumiy sig‘im qanday cheklanishini kuzating.'],
  task:{type:'num',q:'C₁ = 4 μF va C₂ = 6 μF ketma-ket ulanganda umumiy sig‘im qancha bo‘ladi? (μF da)',unit:'μF',ans:2.4,tol:0.04},
  links:[{l:'Vascak: Kondensator',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=elpole_kondenzator&l=uz'}]},
 
-{id:3,m:4,sim:'ohm',title:'Zanjir qismi uchun Om qonunini tekshirish',
+{id:3,m:4,sim:'ohm',
+ meas:{name:'Qarshilik R',unit:'Ω',col:2},title:'Zanjir qismi uchun Om qonunini tekshirish',
  goal:'Kuchlanishni o‘zgartirib tok kuchini o‘lchash, I(U) grafigini qurish va qarshilikning o‘zgarmasligini tekshirish.',
  theory:'Zanjir qismi uchun Om qonuni I = U/R. Agar o‘tkazgich chiziqli bo‘lsa, I(U) grafigi koordinata boshidan o‘tgan to‘g‘ri chiziq bo‘ladi va uning qiyaligi 1/R ga teng. Har bir o‘lchov juftligi uchun R = U/I nisbati hisoblanadi; nisbatlarning bir xilligi Om qonunining bajarilishini tasdiqlaydi. O‘rtacha qiymat tasodifiy xatoliklarni kamaytiradi.',
  steps:['Reostat yordamida kuchlanishni eng kichik qiymatga keltiring.','Voltmetr va ampermetr ko‘rsatishini o‘qib, jadvalga yozing.','Kuchlanishni bosqichma-bosqich oshirib, kamida 5 ta o‘lchov oling.','Har bir qator uchun R = U/I ni hisoblang.','O‘rtacha qarshilikni toping va I(U) to‘g‘ri chiziqligini tekshiring.'],
@@ -1380,7 +1792,8 @@ const LABS = [
  links:[{l:'Vascak: Om qonuni',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=ele_ohm&l=uz'},
         {l:'Video: Om qonunini tekshirish',u:'https://www.youtube.com/watch?v=5rwtJIS_hQQ&t=25s'}]},
 
-{id:4,m:4,sim:'resnet',title:'O‘tkazgichlarni ketma-ket va parallel ulashni o‘rganish',
+{id:4,m:4,sim:'resnet',
+ meas:{name:'Umumiy qarshilik R',unit:'Ω',col:4},title:'O‘tkazgichlarni ketma-ket va parallel ulashni o‘rganish',
  goal:'Ikki qarshilikni ketma-ket va parallel ulab, tok va kuchlanish taqsimlanishini hamda umumiy qarshilikni aniqlash.',
  theory:'Ketma-ket ulashda tok hamma joyda bir xil, kuchlanishlar qo‘shiladi va qarshiliklarga proporsional taqsimlanadi: U₁/U₂ = R₁/R₂. Parallel ulashda kuchlanish bir xil, toklar qo‘shiladi va qarshiliklarga teskari proporsional taqsimlanadi: I₁/I₂ = R₂/R₁. Umumiy qarshilik ketma-ket ulashda R₁+R₂, parallel ulashda R₁R₂/(R₁+R₂) ga teng.',
  steps:['R₁ va R₂ qiymatlarini tanlang va ketma-ket ulanishni yoqing.','Umumiy tokni va har bir qarshilikdagi kuchlanishni o‘lchab jadvalga yozing.','Parallel ulanishga o‘tib, har bir shoxdagi tokni o‘lchang.','Har ikki holat uchun R_umumiy = U/I ni hisoblang.','Natijani nazariy formula bilan solishtiring.'],
@@ -1388,28 +1801,32 @@ const LABS = [
  links:[{l:'PhET: Elektr zanjirlarini yig‘ish (DC)',u:'https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_all.html'},
         {l:'Video: Ketma-ket va parallel ulash',u:'https://www.youtube.com/watch?v=uFfgxxdur5w&t=43s'}]},
 
-{id:5,m:4,sim:'resistivity',title:'O‘tkazgich solishtirma qarshiligini aniqlash',
+{id:5,m:4,sim:'resistivity',
+ meas:{name:'Qarshilik R',unit:'Ω',col:3},title:'O‘tkazgich solishtirma qarshiligini aniqlash',
  goal:'Sim uzunligi va kesimini o‘lchab, qarshilik orqali material solishtirma qarshiligini topish va jadval bilan solishtirish.',
  theory:'R = ρl/S formulasidan ρ = R·S/l. Simning diametri mikrometr bilan o‘lchanadi, kesim yuzasi S = πd²/4 bo‘yicha hisoblanadi. Qarshilik Om qonuni bilan aniqlanadi: R = U/I. Topilgan ρ ni jadval qiymati bilan solishtirish material turini aniqlashga imkon beradi (mis ≈ 1,7·10⁻⁸, alyuminiy ≈ 2,8·10⁻⁸, nixrom ≈ 1,1·10⁻⁶ Ω·m).',
  steps:['Sim uzunligi va diametrini tanlang.','S = πd²/4 bo‘yicha kesim yuzasini hisoblang.','U va I ni o‘lchab R = U/I ni toping.','ρ = R·S/l ni hisoblang.','Natijani jadval qiymatlari bilan solishtirib material turini aniqlang.'],
  task:{type:'choice',q:'Simulyatorda uzunlik 2 m, diametr 0,4 mm bo‘lganda R ≈ 17,5 Ω o‘lchandi. Bu qanday material?',opts:['Nixrom','Mis','Alyuminiy','Grafit'],ans:0},
  links:[{l:'Vascak: O‘tkazgich qarshiligi',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=ele_odpor&l=uz'}]},
 
-{id:6,m:5,sim:'emf',title:'Tok manbaining EYuK va ichki qarshiligini aniqlash',
+{id:6,m:5,sim:'emf',
+ meas:{name:'Qisqich kuchlanishi U',unit:'V',col:2},title:'Tok manbaining EYuK va ichki qarshiligini aniqlash',
  goal:'Tashqi qarshilikni o‘zgartirib U va I ni o‘lchash, U(I) to‘g‘ri chizig‘idan EYuK va ichki qarshilikni topish.',
  theory:'To‘liq zanjir uchun U = ε − I·r. Bu U(I) o‘qlarida to‘g‘ri chiziq: U o‘qi bilan kesishishi ε ga, qiyaligi esa −r ga teng. Ikki o‘lchov juftligidan r = (U₁ − U₂)/(I₂ − I₁) va ε = U₁ + I₁r topiladi. Tashqi qarshilik kamayganda tok ortadi va qisqich kuchlanishi pasayadi — bu ichki qarshilikning bevosita natijasi.',
  steps:['Reostatni eng katta qarshilikka qo‘yib, U va I ni o‘lching.','Qarshilikni kamaytirib, yana bir necha o‘lchov oling (kamida 4 ta).','Jadvaldan ikki uzoq nuqtani tanlang.','r = ΔU/ΔI ni hisoblang.','ε = U + I·r bo‘yicha EYuK ni toping va manbadagi nominal qiymat bilan solishtiring.'],
  task:{type:'num',q:'O‘lchovlaringizdan manbaning EYuK ini toping (V da).',unit:'V',ans:4.5,tol:0.08},
  links:[{l:'Vascak: Manbaning ichki qarshiligi',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=ele_vnitrni_odpor&l=uz'}]},
 
-{id:7,m:6,sim:'electrolysis',title:'Elektroliz. Faradey qonunini tekshirish va elektrokimyoviy ekvivalentni aniqlash',
+{id:7,m:6,sim:'electrolysis',
+ meas:{name:'Ajralgan massa m',unit:'g',col:3},title:'Elektroliz. Faradey qonunini tekshirish va elektrokimyoviy ekvivalentni aniqlash',
  goal:'Mis sulfat eritmasida elektroliz o‘tkazib, ajralgan modda massasini o‘lchash va k ni aniqlash.',
  theory:'Faradeyning birinchi qonuni: m = k·I·t. Elektrokimyoviy ekvivalent k ni aniqlash uchun katod massasining ortishi, tok kuchi va vaqt o‘lchanadi: k = m/(I·t). Ikkinchi qonun k = M/(F·n) bo‘lgani uchun topilgan qiymat nazariy bilan solishtiriladi; mis uchun k ≈ 3,3·10⁻⁷ kg/C. Grafikda m(t) chiziqli bo‘lishi birinchi qonunni tasdiqlaydi.',
  steps:['Tok kuchini belgilangan qiymatda ushlab turing.','Katodning boshlang‘ich massasini qayd qiling.','Vaqtni o‘lchab, har 2 minutda massani jadvalga yozing.','m(t) grafigining chiziqliligini tekshiring.','k = m/(I·t) ni hisoblab, nazariy qiymat bilan solishtiring.'],
  task:{type:'num',q:'Simulyatorda 2 A tok 10 minut o‘tganda katod massasi 0,396 g ga ortdi. Elektrokimyoviy ekvivalentni 10⁻⁷ kg/C birligida toping.',unit:'·10⁻⁷ kg/C',ans:3.3,tol:0.05},
  links:[{l:'Vascak: Elektroliz',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=elkap_rozkladne&l=uz'}]},
 
-{id:8,m:6,sim:'diode',title:'Yarimo‘tkazgichli diodning volt-amper xarakteristikasini olish',
+{id:8,m:6,sim:'diode',
+ meas:{name:'Tok I',unit:'mA',col:2},title:'Yarimo‘tkazgichli diodning volt-amper xarakteristikasini olish',
  goal:'Diodning to‘g‘ri va teskari ulanishdagi VAX ini olish va bir tomonlama o‘tkazuvchanligini tekshirish.',
  theory:'p–n o‘tishning VAX i nochiziqli. To‘g‘ri ulashda 0,3–0,7 V dan keyin tok keskin o‘sadi (kremniy uchun ≈0,7 V, germaniy uchun ≈0,3 V ochilish kuchlanishi). Teskari ulashda faqat juda kichik to‘yinish toki oqadi; kuchlanish teshilish qiymatidan oshsa tok keskin ortadi. VAX ning nochiziqliligi tufayli diod uchun «qarshilik» tushunchasi faqat ish nuqtasida ma’noga ega.',
  steps:['Diodni to‘g‘ri ulashga qo‘yib kuchlanishni noldan asta oshiring.','Har 0,1 V da tokni o‘lchab jadvalga yozing.','Tok sezilarli o‘sa boshlagan kuchlanishni (ochilish kuchlanishini) qayd qiling.','Diodni teskari ulab, tokni o‘lchang.','VAX ni chizib, to‘g‘ri va teskari sohalarni solishtiring.'],
@@ -1417,42 +1834,48 @@ const LABS = [
  links:[{l:'Vascak: Yarimo‘tkazgichli diod',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=pol_dioda&l=uz'},
         {l:'Video: Diodning VAX i',u:'https://www.youtube.com/watch?v=IREAulDslOs&t=3s'}]},
 
-{id:9,m:6,sim:'thermistor',title:'Termistor qarshiligining haroratga bog‘liqligini o‘rganish',
+{id:9,m:6,sim:'thermistor',
+ meas:{name:'Termistor qarshiligi R',unit:'Ω',col:1},title:'Termistor qarshiligining haroratga bog‘liqligini o‘rganish',
  goal:'Termistorni qizdirib qarshilikni o‘lchash, R(t) bog‘liqligini qurish va metall o‘tkazgich bilan solishtirish.',
  theory:'Yarimo‘tkazgichda harorat ortishi bilan erkin tashuvchilar soni eksponensial ortadi, shuning uchun qarshilik keskin kamayadi: R = R₀·exp(B(1/T − 1/T₀)). Metallda esa panjara tebranishlari kuchayib elektronlar harakatiga ko‘proq to‘sqinlik qiladi va qarshilik chiziqli ortadi: R = R₀(1 + αΔt). Shu qarama-qarshi xatti-harakat termistorni harorat datchigi sifatida ishlatish imkonini beradi.',
  steps:['Boshlang‘ich haroratda termistor qarshiligini o‘lchang.','Haroratni 10 °C ga oshirib o‘lchovni takrorlang.','Kamida 6 ta nuqta oling va jadvalga yozing.','R(t) grafigini chizing.','Metall o‘tkazgich grafigi bilan solishtirib, farqni izohlang.'],
  task:{type:'choice',q:'Harorat 20 °C dan 70 °C ga oshirilganda termistor qarshiligi qanday o‘zgardi?',opts:['Bir necha marta kamaydi','Bir necha marta ortdi','Chiziqli ortdi','O‘zgarmadi'],ans:0},
  links:[{l:'Vascak: Termistor',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=pol_termistor&l=uz'}]},
 
-{id:10,m:7,sim:'magfield',title:'Doimiy magnit va tokli o‘tkazgich magnit maydonini o‘rganish',
+{id:10,m:7,sim:'magfield',
+ meas:{name:'Magnit induksiya B',unit:'μT',col:3},title:'Doimiy magnit va tokli o‘tkazgich magnit maydonini o‘rganish',
  goal:'Kompas yordamida doimiy magnit va tokli o‘tkazgich maydon chiziqlarining shaklini va yo‘nalishini aniqlash.',
  theory:'Doimiy magnit maydon chiziqlari magnitdan tashqarida shimoliy qutbdan chiqib janubiy qutbga kiradi va magnit ichida tutashadi — ular berk. Tokli to‘g‘ri o‘tkazgich maydon chiziqlari o‘tkazgichni o‘rab olgan konsentrik aylanalar bo‘lib, yo‘nalishi o‘ng qo‘l (burg‘i) qoidasi bilan topiladi. Maydon kuchi masofaga teskari proporsional: B = μ₀I/(2πr), shu sababli kompas uzoqda kamroq og‘adi.',
  steps:['Kompasni doimiy magnit atrofida turli nuqtalarga qo‘yib, strelka yo‘nalishini qayd qiling.','Chiziqlar shaklini daftarga chizing.','Doimiy magnitni o‘chirib, tokli o‘tkazgichni yoqing.','Kompasni o‘tkazgich atrofida aylantirib, aylanaviy chiziqlarni aniqlang.','Tok yo‘nalishini teskari qilib, strelka qanday burilishini kuzating.'],
  task:{type:'choice',q:'Tokli to‘g‘ri o‘tkazgich magnit maydon chiziqlari qanday shaklda?',opts:['O‘tkazgichni o‘rab olgan konsentrik aylanalar','O‘tkazgichdan tarqaluvchi to‘g‘ri chiziqlar','Parallel tekisliklar','Sferalar'],ans:0},
  links:[{l:'PhET: Magnit va kompas',u:'https://phet.colorado.edu/en/simulations/magnet-and-compass'}]},
 
-{id:11,m:7,sim:'ampere',title:'Tokli o‘tkazgichga magnit maydonda ta’sir qiluvchi Amper kuchini kuzatish',
+{id:11,m:7,sim:'ampere',
+ meas:{name:'Amper kuchi F',unit:'N',col:3},title:'Tokli o‘tkazgichga magnit maydonda ta’sir qiluvchi Amper kuchini kuzatish',
  goal:'Tok kuchi, induksiya va burchakni o‘zgartirib Amper kuchining qanday o‘zgarishini aniqlash.',
  theory:'F = B·I·l·sinα. Kuch tokka va induksiyaga to‘g‘ri proporsional, burchak sinusiga bog‘liq: α = 90° da maksimal, α = 0° da nol. Yo‘nalish chap qo‘l qoidasi bilan aniqlanadi. Tok yoki maydon yo‘nalishini teskari qilish kuchni teskari yo‘naltiradi, ikkisini birga teskari qilish esa yo‘nalishni o‘zgartirmaydi.',
  steps:['Burchakni 90° ga qo‘yib, tokni bosqichma-bosqich oshirib kuchni o‘lchang.','F(I) bog‘liqligining chiziqliligini tekshiring.','Tokni o‘zgarmas qoldirib, induksiyani o‘zgartirib o‘lchovni takrorlang.','Burchakni 0° dan 90° gacha o‘zgartirib, F(α) ni kuzating.','Tok yo‘nalishini teskari qilib, kuch yo‘nalishini chap qo‘l qoidasi bilan tekshiring.'],
  task:{type:'num',q:'B = 0,4 T, I = 5 A, l = 0,3 m, α = 90° bo‘lganda Amper kuchini toping (N da).',unit:'N',ans:0.6,tol:0.04},
  links:[{l:'Vascak: Amper kuchi',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=ele_amper&l=uz'}]},
 
-{id:12,m:7,sim:'motor',title:'Elektr dvigatel modelini yig‘ish va ishlashini o‘rganish',
+{id:12,m:7,sim:'motor',
+ meas:{name:'Aylantiruvchi moment M',unit:'mN·m',col:2},title:'Elektr dvigatel modelini yig‘ish va ishlashini o‘rganish',
  goal:'Ramkaga ta’sir etuvchi aylantiruvchi momentni kuzatish va kollektorning vazifasini tushunish.',
  theory:'Magnit maydondagi tokli ramkaning qarama-qarshi tomonlariga teskari yo‘nalgan Amper kuchlari ta’sir qiladi va aylantiruvchi moment hosil bo‘ladi: M = B·I·S·N·sinα. Ramka tekisligi maydonga perpendikulyar bo‘lganda moment nolga aylanadi; aylanish davom etishi uchun kollektor (yarim halqalar) har yarim aylanada tok yo‘nalishini o‘zgartiradi. Tok yoki maydonni oshirish aylanish tezligini oshiradi.',
  steps:['Tokni yoqib, ramkaning aylanishini kuzating.','Kollektorni o‘chirib, ramka qanday to‘xtab qolishini ko‘ring.','Tok kuchini oshirib, aylanish tezligining o‘zgarishini qayd qiling.','Magnit qutblarini almashtirib, aylanish yo‘nalishini aniqlang.','Moment nolga teng bo‘lgan holatni topib tushuntiring.'],
  task:{type:'choice',q:'Kollektorning asosiy vazifasi nima?',opts:['Har yarim aylanada ramkadagi tok yo‘nalishini o‘zgartirish','Tokni kuchaytirish','Magnit maydonni hosil qilish','Ramkani sovitish'],ans:0},
  links:[{l:'Vascak: Elektr dvigatel modeli',u:'https://www.vascak.cz/data/android/physicsatschool/templateimg.php?s=mag_aa_motor&l=uz'}]},
 
-{id:13,m:9,sim:'induction',title:'Elektromagnit induksiya hodisasini kuzatish',
+{id:13,m:9,sim:'induction',
+ meas:{name:'Maksimal EYuK ε',unit:'V',col:2},title:'Elektromagnit induksiya hodisasini kuzatish',
  goal:'Magnitni g‘altak ichida harakatlantirib induksiya tokini kuzatish va Lens qoidasini tekshirish.',
  theory:'Induksiya EYuK magnit oqimining o‘zgarish tezligiga teng: ε = −N·ΔΦ/Δt. Magnit tez harakatlansa EYuK katta, magnit tinch turganda esa nolga teng — oqim o‘zgarmaydi. Lens qoidasiga ko‘ra induksiya toki o‘z maydoni bilan oqim o‘zgarishiga qarshilik qiladi, shuning uchun magnitni kiritish va chiqarishda tok yo‘nalishi qarama-qarshi bo‘ladi. O‘ramlar sonini oshirish EYuK ni proporsional oshiradi.',
  steps:['Magnitni g‘altakka sekin kiritib, galvanometr ko‘rsatishini qayd qiling.','Tezlikni oshirib takrorlang va ko‘rsatishni solishtiring.','Magnitni g‘altak ichida tinch tuting — ko‘rsatish nolga tushishini ko‘ring.','Magnitni chiqarib, tok yo‘nalishi o‘zgarishini kuzating.','O‘ramlar sonini oshirib tajribani takrorlang va xulosa yozing.'],
  task:{type:'choice',q:'Magnit g‘altak ichida harakatsiz turganda induksiya toki qanday bo‘ladi?',opts:['Nolga teng, chunki magnit oqimi o‘zgarmaydi','Maksimal, chunki oqim katta','O‘zgarmas va kichik','Yo‘nalishini davriy o‘zgartiradi'],ans:0},
  links:[{l:'PhET: Faradey elektromagnit laboratoriyasi',u:'https://phet.colorado.edu/sims/html/faradays-electromagnetic-lab/latest/faradays-electromagnetic-lab_all.html'}]},
 
-{id:14,m:12,sim:'transformer',title:'Transformator ishlashini o‘rganish va transformatsiya koeffitsiyentini aniqlash',
+{id:14,m:12,sim:'transformer',
+ meas:{name:'Chiqish kuchlanishi U₂',unit:'V',col:3},title:'Transformator ishlashini o‘rganish va transformatsiya koeffitsiyentini aniqlash',
  goal:'O‘ramlar sonini o‘zgartirib U₁ va U₂ ni o‘lchash, k = N₁/N₂ = U₁/U₂ munosabatini tekshirish.',
  theory:'Transformator faqat o‘zgaruvchan tokda ishlaydi, chunki uning asosi elektromagnit induksiya. Ideal transformatorda U₁/U₂ = N₁/N₂ = k va quvvat saqlanadi: U₁I₁ = U₂I₂. Demak kuchlanish necha marta ortsa, tok shuncha marta kamayadi. Haqiqiy transformatorda o‘zakdagi uyurmaviy toklar va o‘ramlar qarshiligi tufayli FIK 100% dan kichik bo‘ladi.',
  steps:['N₁ ni belgilab, N₂ ni o‘zgartirib U₂ ni o‘lchang.','Har bir o‘lchov uchun k = U₁/U₂ va N₁/N₂ ni hisoblab solishtiring.','Kuchaytiruvchi va pasaytiruvchi rejimlarni ikkalasini ham sinab ko‘ring.','Yuklamadagi tokni o‘lchab U₁I₁ ≈ U₂I₂ ekanini tekshiring.','Manbani o‘zgarmas tokka almashtirib, U₂ nega nolga tushishini izohlang.'],
@@ -3243,7 +3666,7 @@ function viewLesson(){
     '<div class="vizbox"><canvas id="lesCv"></canvas><div class="vizcap">'+esc(m.vizcap)+'</div></div>'+
     m.concepts.map(function(c){ return '<div class="concept"><h4>'+esc(c.h)+'</h4><p>'+esc(c.p)+'</p></div>'; }).join('')+
     '<div class="card pad"><span class="eyebrow">Asosiy formulalar</span><div class="grid" style="margin-top:11px;gap:10px">'+
-      m.formulas.map(function(f){ return '<div><div class="note" style="margin-bottom:4px">'+esc(f.n)+'</div><span class="fml">'+f.f+'</span></div>'; }).join('')+
+      m.formulas.map(function(f){ return '<div class="fmlrow"><div class="fname">'+esc(f.n)+'</div><span class="fml">'+mathHTML(f.f)+'</span></div>'; }).join('')+
     '</div></div>'+
     '<div class="deff"><span class="eyebrow">Muhim tushunchalar</span>'+
       m.terms.map(function(t){ return '<p style="font-size:14.5px;margin-top:7px"><b>'+esc(t.t)+'</b> — '+esc(t.d)+'</p>'; }).join('')+
@@ -3430,48 +3853,92 @@ function testResult(){
 /* ---------- MASHQ ---------- */
 function viewMashq(){
   if(!S.mash) return mashSetup();
+  if(!S.mash.list) return mashList();
   return mashRun();
+}
+function exDone(e){ return !!(P.ex[e.id] && P.ex[e.id].solved); }
+function modExStat(id){
+  const list=E_BY_M[id]||[]; let sv=0;
+  list.forEach(function(e){ if(exDone(e)) sv++; });
+  return {n:list.length, s:sv};
 }
 function mashSetup(){
   V.innerHTML='<div class="page-h fade"><div><span class="eyebrow">3-bo‘lim</span><h1>Mashq</h1>'+
-   '<p>Mavzuni tanlang. Har masalada berilganlar, ishoralar va bosqichma-bosqich yechim bor — javobni o‘zingiz hisoblab kiritasiz.</p></div></div>'+
+   '<p>Har mavzudagi mashqlar uch toifaga ajratilgan: <b>Bilish</b> — ta’rif va birliklar, <b>Qo‘llash</b> — formulaga qo‘yib hisoblash, '+
+   '<b>Mulohaza</b> — tahlil va teskari masalalar.</p></div></div>'+
+   '<div class="card pad fade" style="margin-bottom:14px"><div class="catlegend">'+
+     CAT_ORDER.map(function(c){ return '<div class="catleg" style="--c:'+EXCATS[c].c+'"><b>'+EXCATS[c].n+'</b><span>'+esc(EXCATS[c].d)+'</span></div>'; }).join('')+
+   '</div></div>'+
    '<div class="card pad fade"><span class="eyebrow">Mavzu</span><div class="pickgrid" style="margin-top:11px">'+
     MODULES.map(function(m){
-      const list=E_BY_M[m.id]||[]; let sv=0; list.forEach(function(e){ if(P.ex[e.id]&&P.ex[e.id].solved) sv++; });
-      return '<button class="pick" data-act="start-mash" data-m="'+m.id+'"><b>'+m.id+'. '+esc(m.title.split('.')[0])+'</b>'+
-        '<small>'+sv+'/'+list.length+' yechilgan</small></button>';
+      const st=modExStat(m.id);
+      return '<button class="pick" data-act="open-mash-mod" data-m="'+m.id+'"><b>'+m.id+'. '+esc(m.title.split('.')[0])+'</b>'+
+        '<small>'+st.s+'/'+st.n+' yechilgan</small></button>';
     }).join('')+'</div></div>';
+}
+function mashList(){
+  const id=S.mash.m, m=M[id];
+  V.innerHTML='<div class="crumb"><button data-act="quit-mash">Mashq</button><span>›</span><span>'+id+'-mavzu</span></div>'+
+  '<div class="page-h fade"><div><span class="eyebrow">'+id+'-mavzu mashqlari</span><h1>'+esc(m.title)+'</h1></div>'+
+   '<button class="btn btn-sm" data-act="open-mod" data-m="'+id+'">Nazariyani o‘qish</button></div>'+
+  '<div class="grid fade" style="gap:14px">'+
+   CAT_ORDER.map(function(cat){
+     const list=E_BY_CAT[id+'|'+cat]||[];
+     let sv=0; list.forEach(function(e){ if(exDone(e)) sv++; });
+     return '<div class="card pad catcard" style="--c:'+EXCATS[cat].c+'">'+
+      '<div class="page-h" style="margin-bottom:12px"><div><span class="catbadge">'+EXCATS[cat].n+'</span>'+
+      '<p class="note" style="margin-top:6px">'+esc(EXCATS[cat].d)+'</p></div>'+
+      '<span class="chip '+(sv===list.length&&list.length?'ok':'')+'">'+sv+'/'+list.length+'</span></div>'+
+      '<div class="mlist">'+list.map(function(e,k){
+        return '<button class="mcard'+(exDone(e)?' done':'')+'" data-act="open-ex" data-ex="'+e.id+'">'+
+          '<span class="mnum">'+(k+1)+'</span>'+
+          '<span><h3>'+esc(e.sub)+'</h3><p>'+esc(e.q.length>92? e.q.slice(0,92)+'…' : e.q)+'</p></span>'+
+          '<span class="chip '+(exDone(e)?'ok':'')+'">'+(exDone(e)?'yechilgan':(e.type==='choice'?'test':'hisob'))+'</span></button>';
+      }).join('')+'</div></div>';
+   }).join('')+
+  '</div>';
 }
 function mashRun(){
   const K=S.mash, e=K.list[K.i];
   const st=P.ex[e.id]||{};
-  V.innerHTML='<div class="crumb"><button data-act="quit-mash">Mashq</button><span>›</span><span>'+e.m+'-mavzu</span></div>'+
-  '<div class="card pad fade">'+
-   '<div class="qhead"><span class="chip mag">'+(K.i+1)+' / '+K.list.length+'</span>'+
-     '<span class="bar"><i style="width:'+pct(K.i/K.list.length)+'%"></i></span>'+
-     '<span class="chip">'+LVL_NAME[e.lvl]+' '+lvlDots(e.lvl)+'</span>'+
+  const cat=EXCATS[e.cat];
+  V.innerHTML='<div class="crumb"><button data-act="quit-mash">Mashq</button><span>›</span>'+
+   '<button data-act="open-mash-mod" data-m="'+e.m+'">'+e.m+'-mavzu</button><span>›</span><span>'+cat.n+'</span></div>'+
+  '<div class="card pad fade" style="--c:'+cat.c+'">'+
+   '<div class="qhead"><span class="catbadge">'+cat.n+'</span>'+
+     '<span class="chip">'+(K.i+1)+' / '+K.list.length+'</span>'+
+     '<span class="bar"><i style="width:'+pct((K.i)/K.list.length)+'%"></i></span>'+
      (st.solved? '<span class="chip ok">yechilgan</span>':'')+'</div>'+
    '<div class="note" style="margin-bottom:8px">'+esc(e.sub)+'</div>'+
    '<p class="qtext">'+esc(e.q)+'</p>'+
-   '<div style="margin-top:14px"><span class="eyebrow">Berilgan</span><div class="given" style="margin-top:8px">'+
-     e.given.map(function(g){ return '<div class="gitem"><b>'+g.v+'</b><span>'+g.s+'</span></div>'; }).join('')+
-   '</div></div>'+
-   '<div class="ansrow" style="margin-top:18px">'+
-     '<div class="ansin"><input id="ansIn" inputmode="decimal" placeholder="javob" autocomplete="off"><span>'+(e.unit||'')+'</span></div>'+
-     '<button class="btn btn-main" data-act="check-ex">Tekshirish</button>'+
-     '<button class="btn btn-sm btn-amp" data-act="hint">Ishora</button>'+
-     '<button class="btn btn-sm" data-act="solve">Yechimni ko‘rsatish</button>'+
-   '</div>'+
-   '<p class="note" style="margin-top:8px">Kasr son uchun nuqta yoki vergul yozsa bo‘ladi. Katta/kichik sonlar: 1.5e-5 shaklida.</p>'+
+   (e.type==='num'
+     ? '<div style="margin-top:14px"><span class="eyebrow">Berilgan</span><div class="given" style="margin-top:8px">'+
+       e.given.map(function(g){ return '<div class="gitem"><b>'+esc(g.v)+'</b><span>'+esc(g.s)+'</span></div>'; }).join('')+
+       '</div></div>'+
+       '<div class="ansrow" style="margin-top:18px">'+
+         '<div class="ansin"><input id="ansIn" inputmode="decimal" placeholder="javob" autocomplete="off"><span>'+esc(e.unit||'')+'</span></div>'+
+         '<button class="btn btn-main" data-act="check-ex">Tekshirish</button>'+
+         '<button class="btn btn-sm btn-amp" data-act="hint">Ishora</button>'+
+         '<button class="btn btn-sm" data-act="solve">Yechimni ko‘rsatish</button>'+
+       '</div>'+
+       '<p class="note" style="margin-top:8px">Kasr son uchun nuqta yoki vergul yozsa bo‘ladi. Katta/kichik sonlar: 1.5e-5 shaklida.</p>'
+     : '<div class="opts" id="exOpts">'+
+       e.opts.map(function(o,i){ return '<button class="opt" data-act="ex-opt" data-k="'+i+'"><i>'+'ABCD'[i]+'</i><span>'+esc(o)+'</span></button>'; }).join('')+
+       '</div>')+
    '<div id="exfb"></div>'+
    '<div class="row" style="margin-top:16px;justify-content:space-between">'+
      (K.i>0? '<button class="btn btn-sm" data-act="prev-ex">← Oldingi</button>':'<span></span>')+
      (K.i<K.list.length-1? '<button class="btn btn-sm" data-act="next-ex">Keyingi →</button>':
-       '<button class="btn btn-sm" data-act="quit-mash">Mavzular ro‘yxati</button>')+
+       '<button class="btn btn-sm" data-act="open-mash-mod" data-m="'+e.m+'">Mavzuga qaytish</button>')+
    '</div></div>';
   const inp=$('#ansIn');
   if(inp) inp.addEventListener('keydown',function(ev){ if(ev.key==='Enter') checkEx(); });
   K.hint=0;
+}
+function stepsHTML(e){
+  return '<div style="margin-top:14px"><span class="eyebrow">Yechim bosqichlari</span><div class="steps" style="margin-top:10px">'+
+    e.steps.map(function(s){ return '<div class="step"><div><p>'+esc(s.p)+'</p><span class="fml">'+mathHTML(s.f)+'</span></div></div>'; }).join('')+
+    '</div></div>';
 }
 function checkEx(){
   const K=S.mash, e=K.list[K.i];
@@ -3486,9 +3953,7 @@ function checkEx(){
   if(near(v,e.ans,e.tol)){
     st.solved=true; P.ex[e.id]=st; saveP(); setRing();
     $('#exfb').innerHTML='<div class="why pop" style="border-left-color:var(--ok)"><b style="color:var(--ok)">To‘g‘ri</b>'+
-      'Javob: '+fmt(e.ans).replace('·10^','·10^')+' '+esc(e.unit||'')+'. '+(st.tries<=1?'Birinchi urinishda topdingiz.':'Urinishlar soni: '+st.tries+'.')+'</div>'+
-      '<div style="margin-top:14px"><span class="eyebrow">Yechim bosqichlari</span><div class="steps" style="margin-top:10px">'+
-      e.steps.map(function(s){ return '<div class="step"><div><p>'+esc(s.p)+'</p><span class="fml">'+s.f+'</span></div></div>'; }).join('')+'</div></div>';
+      'Javob: '+fmt(e.ans)+' '+esc(e.unit||'')+'. '+(st.tries<=1?'Birinchi urinishda topdingiz.':'Urinishlar soni: '+st.tries+'.')+'</div>'+stepsHTML(e);
   } else {
     P.ex[e.id]=st; saveP();
     const rel=Math.abs((v-e.ans)/(e.ans||1));
@@ -3499,8 +3964,25 @@ function checkEx(){
     $('#exfb').innerHTML='<div class="why pop" style="border-left-color:var(--bad)"><b style="color:var(--bad)">Hali to‘g‘ri emas</b>'+esc(tip)+'</div>';
   }
 }
+function exOpt(k){
+  const K=S.mash, e=K.list[K.i];
+  const btns=$$('#exOpts .opt');
+  if(btns.length && btns[0].hasAttribute('disabled')) return;
+  btns.forEach(function(b,i){
+    b.setAttribute('disabled','');
+    if(i===e.ans) b.classList.add('good'); else if(i===k) b.classList.add('wrong');
+  });
+  const ok=(k===e.ans);
+  const st=P.ex[e.id]||{solved:false,tries:0};
+  st.tries=(st.tries||0)+1;
+  if(ok){ st.solved=true; }
+  P.ex[e.id]=st; saveP(); setRing();
+  $('#exfb').innerHTML='<div class="why pop" style="border-left-color:'+(ok?'var(--ok)':'var(--bad)')+'">'+
+    '<b style="color:'+(ok?'var(--ok)':'var(--bad)')+'">'+(ok?'To‘g‘ri':'Xato')+'</b>'+esc(e.why)+'</div>';
+}
 function showHint(){
   const K=S.mash, e=K.list[K.i];
+  if(!e.hints || !e.hints.length) return;
   K.hint=Math.min((K.hint||0)+1, e.hints.length);
   $('#exfb').innerHTML='<div class="why pop" style="border-left-color:var(--amp)"><b style="color:var(--amp)">Ishora '+K.hint+' / '+e.hints.length+'</b>'+
     esc(e.hints[K.hint-1])+'</div>';
@@ -3508,16 +3990,14 @@ function showHint(){
 }
 function showSolve(){
   const K=S.mash, e=K.list[K.i];
-  $('#exfb').innerHTML='<div style="margin-top:16px"><span class="eyebrow">Bosqichma-bosqich yechim</span><div class="steps" style="margin-top:10px">'+
-    e.steps.map(function(s){ return '<div class="step"><div><p>'+esc(s.p)+'</p><span class="fml">'+s.f+'</span></div></div>'; }).join('')+
-    '</div><p class="note" style="margin-top:10px">Javob: <b>'+fmt(e.ans)+' '+esc(e.unit||'')+'</b></p></div>';
+  $('#exfb').innerHTML=stepsHTML(e)+'<p class="note" style="margin-top:10px">Javob: <b>'+fmt(e.ans)+' '+esc(e.unit||'')+'</b></p>';
 }
 </script>
 <script>
 /* ---------- LABORATORIYA ---------- */
 function viewLab(){
   V.innerHTML='<div class="page-h fade"><div><span class="eyebrow">4-bo‘lim</span><h1>Laboratoriya ishi</h1>'+
-   '<p>Har bir ishda ichki simulyator bor: kattaliklarni o‘zgartirib o‘lchang, jadval tuzing va natijani hisoblab tekshiring. Tashqi PhET va Vascak simulyatorlariga havolalar ham berilgan.</p></div></div>'+
+   '<p>Har bir ishda ichki simulyator bor: kattaliklarni o‘zgartirib o‘lchang, o‘z jadvalingizni to‘ldiring, absolut va nisbiy xatolikni hisoblang.</p></div></div>'+
    SECTIONS.map(function(sec){
      const list=LABS.filter(function(l){ return SEC_OF[l.m]===sec; });
      if(!list.length) return '';
@@ -3537,6 +4017,7 @@ function viewLabOne(){
   if(!L){ nav('lab'); return; }
   const def=SIMS[L.sim];
   const st=P.labs[L.id]||{};
+  const ms=L.meas||{name:'O‘lchangan kattalik',unit:'',col:1};
   V.innerHTML=
   '<div class="crumb"><button data-act="go-lab">Laboratoriya</button><span>›</span><span>'+L.id+'-ish</span>'+
    '<span>›</span><button data-act="open-mod" data-m="'+L.m+'">'+L.m+'-mavzu</button></div>'+
@@ -3549,7 +4030,7 @@ function viewLabOne(){
    (def? '<div class="simwrap"><div class="simstage"><canvas id="simCv"></canvas></div><div class="simctl" id="simCtl"></div></div>'
        : '<div class="card pad"><p class="note">Bu ish uchun simulyator tashqi havolalar orqali ochiladi.</p></div>')+
 
-   (def? '<div class="card pad"><div class="page-h" style="margin-bottom:12px"><div><span class="eyebrow">O‘lchash jadvali</span>'+
+   (def? '<div class="card pad"><div class="page-h" style="margin-bottom:12px"><div><span class="eyebrow">Simulyator o‘lchovlari</span>'+
      '<p class="note">«O‘lchash» tugmasini bosib hozirgi qiymatlarni jadvalga yozing.</p></div>'+
      '<div class="row"><button class="btn btn-sm btn-main" data-act="measure">O‘lchash</button>'+
      '<button class="btn btn-sm" data-act="clear-meas">Tozalash</button></div></div>'+
@@ -3560,6 +4041,28 @@ function viewLabOne(){
    '<div class="card pad"><span class="eyebrow">Ishni bajarish tartibi</span>'+
      '<ol class="labsteps" style="margin-top:11px">'+L.steps.map(function(s){ return '<li><span>'+esc(s)+'</span></li>'; }).join('')+'</ol></div>'+
 
+   /* --- o'quvchi to'ldiradigan jadval va xatoliklar --- */
+   '<div class="card pad">'+
+     '<div class="page-h" style="margin-bottom:12px"><div><span class="eyebrow">O‘lchash natijalari jadvali</span>'+
+       '<p class="note">O‘lchangan kattalik: <b>'+esc(ms.name)+(ms.unit?', '+esc(ms.unit):'')+'</b></p></div>'+
+       '<div class="row">'+(def?'<button class="btn btn-sm" data-act="err-import">Simulyator jadvalidan olish</button>':'')+
+       '<button class="btn btn-sm" data-act="err-add">+ qator</button>'+
+       '<button class="btn btn-sm" data-act="err-clear">Tozalash</button></div></div>'+
+     '<div class="errnote" style="margin-bottom:14px"><b>Topshiriq.</b> O‘lchash natijalari asosida absolut va nisbiy xatolikni aniqlang.</div>'+
+     '<div class="tscroll"><table class="errtbl" id="errT"><thead><tr>'+
+       '<th>№</th><th>'+esc(ms.name)+(ms.unit?' , '+esc(ms.unit):'')+'</th>'+
+       '<th>Δx<sub>i</sub> = |x<sub>i</sub> − x̄|</th></tr></thead><tbody id="errBody"></tbody></table></div>'+
+     '<div class="errgrid" style="margin-top:14px">'+
+       '<div class="errout" id="errOut"></div>'+
+       '<div class="errfinal" id="errFinal"></div>'+
+       '<div class="fmlrow"><div class="fname">Hisoblash formulalari</div>'+
+         '<span class="fml">'+mathHTML('\\text{x̄} = \\frac{x_1 + x_2 + … + x_n}{n}')+'</span>'+
+         '<span class="fml">'+mathHTML('Δx = \\frac{\\abs{x_1 − \\text{x̄}} + … + \\abs{x_n − \\text{x̄}}}{n}')+'</span>'+
+         '<span class="fml">'+mathHTML('ε = \\frac{Δx}{\\text{x̄}}·100%')+'</span>'+
+       '</div>'+
+     '</div>'+
+   '</div>'+
+
    '<div class="card pad"><span class="eyebrow">Hisobot savoli</span>'+
     '<p class="qtext" style="margin-top:8px;font-size:16px">'+esc(L.task.q)+'</p>'+
     (L.task.type==='num'
@@ -3569,7 +4072,7 @@ function viewLabOne(){
         L.task.opts.map(function(o,i){ return '<button class="opt" data-act="lab-opt" data-k="'+i+'"><i>'+'ABCD'[i]+'</i><span>'+esc(o)+'</span></button>'; }).join('')+'</div>')+
     '<div id="labfb"></div></div>'+
 
-   '<div class="card pad"><span class="eyebrow">Tashqi simulyator va video</span><div class="extlinks" style="margin-top:11px">'+
+   '<div class="card pad"><span class="eyebrow">Laboratoriyani bajarish uchun qo‘llanma va videolar</span><div class="extlinks" style="margin-top:11px">'+
      L.links.map(function(k){
        return '<a class="extlink" href="'+esc(k.u)+'" target="_blank" rel="noopener">'+
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 4h6v6M20 4l-8.5 8.5M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></svg>'+
@@ -3584,10 +4087,12 @@ function viewLabOne(){
   '</div>';
 
   if(def) mountSim(def,L);
+  errInit(L);
   const li=$('#labIn');
   if(li) li.addEventListener('keydown',function(ev){ if(ev.key==='Enter') checkLab(); });
 }
 
+/* ---------- simulyator ---------- */
 let SIMST=null;
 function mountSim(def,L){
   const s={};
@@ -3614,7 +4119,8 @@ function mountSim(def,L){
     const el=$('#sl'+ci);
     el.addEventListener('input',function(){
       s[c.k]=parseFloat(el.value);
-      $('#sv'+ci).textContent=(c.step<1? s[c.k].toFixed(String(c.step).split('.')[1].length) : s[c.k])+' '+c.u;
+      const dec=String(c.step).split('.')[1];
+      $('#sv'+ci).textContent=(dec? s[c.k].toFixed(dec.length) : s[c.k])+' '+c.u;
     });
   });
   $$('#simCtl .sw').forEach(function(b){
@@ -3658,9 +4164,19 @@ function mountSim(def,L){
 function measure(){
   if(!SIMST) return;
   const r=SIMST.def.meas(SIMST.s,SIMST.o,SIMST.w,SIMST.h);
+  /* haqiqiy o'lchovdagidek kichik tarqoqlik — xatolik hisobi ma'noga ega bo'lishi uchun */
+  const L=SIMST.lab, c=(L.meas||{}).col;
+  if(c!==undefined && r[c]!==undefined){
+    const raw=String(r[c]), v=parseNum(raw);
+    if(!isNaN(v) && v!==0){
+      const dot=raw.indexOf('.')>=0? raw.length-raw.indexOf('.')-1 : (raw.indexOf(',')>=0? raw.length-raw.indexOf(',')-1 : 0);
+      const jit=v*(1+(Math.random()-0.5)*0.022);
+      r[c]=jit.toFixed(Math.max(dot, Math.abs(jit)>=100?1:(Math.abs(jit)>=1?2:4)));
+    }
+  }
   SIMST.rows.push(r);
   drawMeas();
-  toast('Jadvalga yozildi ('+SIMST.rows.length+')');
+  toast('Simulyator jadvaliga yozildi ('+SIMST.rows.length+')');
 }
 function clearMeas(){ if(SIMST){ SIMST.rows=[]; drawMeas(); } }
 function drawMeas(){
@@ -3670,6 +4186,96 @@ function drawMeas(){
   }).join('');
   const e=$('#measEmpty'); if(e) e.hidden=SIMST.rows.length>0;
 }
+
+/* ---------- o'quvchi jadvali va xatoliklar ---------- */
+let ERR=null;
+function errInit(L){
+  const st=P.labs[L.id]||{};
+  let vals=(st.err && st.err.length)? st.err.slice() : ['','','','',''];
+  if(vals.length<3) while(vals.length<3) vals.push('');
+  ERR={lab:L, vals:vals, ms:L.meas||{name:'x',unit:'',col:1}};
+  errRender();
+}
+function errSave(){
+  if(!ERR) return;
+  const st=P.labs[ERR.lab.id]||{}; st.err=ERR.vals.slice(); P.labs[ERR.lab.id]=st; saveP();
+}
+function errNums(){
+  const out=[];
+  ERR.vals.forEach(function(v){ const n=parseNum(v); if(!isNaN(n)) out.push(n); });
+  return out;
+}
+function errStats(){
+  const a=errNums();
+  if(a.length<2) return null;
+  let sum=0; a.forEach(function(x){ sum+=x; });
+  const mean=sum/a.length;
+  let ds=0; a.forEach(function(x){ ds+=Math.abs(x-mean); });
+  const dx=ds/a.length;
+  const eps= mean!==0 ? Math.abs(dx/mean)*100 : 0;
+  return {n:a.length, mean:mean, dx:dx, eps:eps};
+}
+function decFor(a){ a=Math.abs(a); return a>=100?1:(a>=10?2:(a>=1?3:(a>=0.1?4:(a>=0.001?5:7)))); }
+function nf(x,d){
+  if(!isFinite(x)) return '—';
+  const dec = d!==undefined? d : decFor(x);
+  return x.toFixed(dec).replace('.',',');
+}
+function errRender(){
+  const tb=$('#errBody'); if(!tb||!ERR) return;
+  const st=errStats();
+  tb.innerHTML=ERR.vals.map(function(v,i){
+    const n=parseNum(v);
+    let d='—';
+    if(st && !isNaN(n)) d=nf(Math.abs(n-st.mean), decFor(st.mean));
+    return '<tr><td class="idx">'+(i+1)+'</td>'+
+      '<td><input data-err="'+i+'" inputmode="decimal" value="'+esc(v)+'" placeholder="—" autocomplete="off"></td>'+
+      '<td class="calc">'+d+'</td></tr>';
+  }).join('');
+  $$('#errBody input').forEach(function(inp){
+    inp.addEventListener('input',function(){
+      ERR.vals[Number(inp.getAttribute('data-err'))]=inp.value;
+      errSave(); errStatsRender();
+    });
+    inp.addEventListener('blur',errRender);
+  });
+  errStatsRender();
+}
+function errStatsRender(){
+  const out=$('#errOut'), fin=$('#errFinal');
+  if(!out||!fin||!ERR) return;
+  const st=errStats(), u=ERR.ms.unit?(' '+ERR.ms.unit):'';
+  if(!st){
+    out.innerHTML='<div class="ro"><b>—</b><span>o‘rtacha x̄</span></div>'+
+      '<div class="ro"><b>—</b><span>absolut Δx</span></div>'+
+      '<div class="ro"><b>—</b><span>nisbiy ε</span></div>';
+    fin.innerHTML='<span class="note" style="font-family:var(--f-body)">Kamida ikkita o‘lchov qiymatini kiriting — o‘rtacha qiymat, absolut va nisbiy xatolik avtomatik hisoblanadi.</span>';
+    return;
+  }
+  out.innerHTML=
+    '<div class="ro volt"><b>'+nf(st.mean,decFor(st.mean))+'</b><span>o‘rtacha x̄'+esc(u)+'</span></div>'+
+    '<div class="ro amp"><b>'+nf(st.dx,decFor(st.mean))+'</b><span>absolut Δx'+esc(u)+'</span></div>'+
+    '<div class="ro"><b style="color:'+(st.eps<5?'var(--ok)':(st.eps<15?'var(--warn)':'var(--bad)'))+'">'+nf(st.eps,1)+'%</b><span>nisbiy ε</span></div>'+
+    '<div class="ro"><b>'+st.n+'</b><span>o‘lchovlar soni</span></div>';
+  fin.innerHTML=mathHTML('x = '+nf(st.mean,decFor(st.mean))+' ± '+nf(st.dx,decFor(st.mean))+'\\text{ '+ERR.ms.unit+'}')+
+    '<span class="note" style="font-family:var(--f-body);display:block;margin-top:6px">Nisbiy xatolik ε = '+nf(st.eps,1)+'% — '+
+    (st.eps<5?'o‘lchov aniq bajarilgan.':(st.eps<15?'o‘lchovni takrorlab aniqlikni oshirish mumkin.':'tarqoqlik katta, o‘lchovni qaytadan bajaring.'))+'</span>';
+}
+function errAdd(){ if(!ERR) return; if(ERR.vals.length>=10){ toast('Ko‘pi bilan 10 qator'); return; } ERR.vals.push(''); errSave(); errRender(); }
+function errClear(){ if(!ERR) return; ERR.vals=ERR.vals.map(function(){ return ''; }); errSave(); errRender(); }
+function errImport(){
+  if(!ERR||!SIMST||!SIMST.rows.length){ toast('Avval simulyatorda «O‘lchash» tugmasini bosing'); return; }
+  const col=ERR.ms.col;
+  const vals=SIMST.rows.map(function(r){ return String(r[col]!==undefined? r[col] : ''); })
+    .filter(function(v){ return !isNaN(parseNum(v)); });
+  if(!vals.length){ toast('Jadvalda son qiymat topilmadi'); return; }
+  ERR.vals=vals.slice(0,10);
+  while(ERR.vals.length<3) ERR.vals.push('');
+  errSave(); errRender();
+  toast(vals.length+' ta qiymat ko‘chirildi');
+}
+
+/* ---------- hisobot savoli ---------- */
 function labOk(L){
   const st=P.labs[L.id]||{}; st.done=true; P.labs[L.id]=st; saveP(); setRing();
 }
@@ -3683,8 +4289,7 @@ function checkLab(){
   if(near(v,L.task.ans,L.task.tol)){
     labOk(L);
     $('#labfb').innerHTML='<div class="why pop" style="border-left-color:var(--ok)"><b style="color:var(--ok)">To‘g‘ri — ish qabul qilindi</b>'+
-      'Javob: '+fmt(L.task.ans)+' '+esc(L.task.unit||'')+'. Natijani daftaringizdagi jadval bilan solishtirib ko‘ring.</div>';
-    const ch=$('.page-h .chip'); if(!ch) nav('labone',{lab:L.id});
+      'Javob: '+fmt(L.task.ans)+' '+esc(L.task.unit||'')+'. Endi o‘lchash jadvalingiz bo‘yicha absolut va nisbiy xatolikni ham yozib qo‘ying.</div>';
   } else {
     $('#labfb').innerHTML='<div class="why pop" style="border-left-color:var(--bad)"><b style="color:var(--bad)">Mos kelmadi</b>'+
       'Simulyatordagi qiymatlarni topshiriqda berilgan shartga keltirib, qaytadan o‘lchab ko‘ring. Birliklarga ham e’tibor bering.</div>';
@@ -3692,7 +4297,9 @@ function checkLab(){
 }
 function labOpt(k){
   const L=SIMST? SIMST.lab : LABS.filter(function(x){return x.id===S.lab;})[0];
-  $$('#labOpts .opt').forEach(function(b,i){
+  const btns=$$('#labOpts .opt');
+  if(btns.length && btns[0].hasAttribute('disabled')) return;
+  btns.forEach(function(b,i){
     b.setAttribute('disabled','');
     if(i===L.task.ans) b.classList.add('good'); else if(i===k) b.classList.add('wrong');
   });
@@ -3735,14 +4342,18 @@ V.addEventListener('click',function(ev){
       const q=S.quiz; S.quiz=buildQuiz(q.mSel,q.lvl); render(); window.scrollTo(0,0); break;
     }
     case 'ai': runAI(S.quiz,S.quiz.an,$('#aiBox'),b); break;
-    case 'start-test': {
-      S.quiz=buildQuiz(Number(m),'all'); nav('test'); break;
+    case 'start-test': { S.quiz=buildQuiz(Number(m),'all'); nav('test'); break; }
+    case 'start-mash':
+    case 'open-mash-mod': S.mash={m:Number(m)}; nav('mashq'); break;
+    case 'open-ex': {
+      const id=b.getAttribute('data-ex');
+      const e=EXERCISES.filter(function(x){ return x.id===id; })[0];
+      if(!e){ toast('Mashq topilmadi'); return; }
+      const list=(E_BY_CAT[e.m+'|'+e.cat]||[]).slice();
+      S.mash={m:e.m, cat:e.cat, list:list, i:Math.max(0,list.indexOf(e)), hint:0};
+      nav('mashq'); break;
     }
-    case 'start-mash': {
-      const list=(E_BY_M[Number(m)]||[]).slice();
-      if(!list.length){ toast('Mashq topilmadi'); return; }
-      S.mash={list:list,i:0,hint:0}; nav('mashq'); break;
-    }
+    case 'ex-opt': exOpt(Number(k)); break;
     case 'quit-mash': S.mash=null; nav('mashq'); break;
     case 'check-ex': checkEx(); break;
     case 'hint': showHint(); break;
@@ -3751,6 +4362,9 @@ V.addEventListener('click',function(ev){
     case 'prev-ex': S.mash.i--; mashRun(); window.scrollTo(0,0); break;
     case 'measure': measure(); break;
     case 'clear-meas': clearMeas(); break;
+    case 'err-add': errAdd(); break;
+    case 'err-clear': errClear(); break;
+    case 'err-import': errImport(); break;
     case 'check-lab': checkLab(); break;
     case 'lab-opt': labOpt(Number(k)); break;
   }
